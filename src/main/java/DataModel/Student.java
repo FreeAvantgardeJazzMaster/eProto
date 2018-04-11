@@ -19,6 +19,10 @@ public class Student {
         return index;
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -55,11 +59,12 @@ public class Student {
         this.index = count.incrementAndGet();
     }
 
-    public Student(String firstName, String lastName, Date birthDate){
+    public Student(String firstName, String lastName, Date birthDate, List<Grade> grades){
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.index = count.incrementAndGet();
+        this.grades = grades;
     }
 
     private void addGrade(Grade grade){

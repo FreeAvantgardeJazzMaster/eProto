@@ -16,6 +16,10 @@ public class Grade {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Course getCourse() {
         return course;
     }
