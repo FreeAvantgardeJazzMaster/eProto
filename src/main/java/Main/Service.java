@@ -20,41 +20,41 @@ public class Service {
 
     @GET
     @Path("/students")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Student> getStudents(){
         return dataBase.getStudents();
     }
 
     @GET
     @Path("/students/{index}")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Student getStudentByIndex(@PathParam("index") int index){
         return dataBase.getStudentByIndex(index);
     }
 
     @GET
     @Path("/students/{index}/grades")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Grade> getStudentGrades(@PathParam("index") int index){
         return dataBase.getStudentByIndexGrades(index);
     }
     @GET
     @Path("/students/{index}/grades/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Grade getStudentGrade(@PathParam("index") int index, @PathParam("id") int id){
         return dataBase.getStudentByIndexGradeById(index, id);
     }
 
     @GET
     @Path("/courses")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Course> getCourses(){
         return dataBase.getCourses();
     }
 
     @GET
     @Path("/courses/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Course getCourses(@PathParam("id") int id){
         return dataBase.getCourseById(id);
     }

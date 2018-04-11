@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 public class DataBase {
-    private List<Student> students = new ArrayList<>();
-    private List<Course> courses = new ArrayList<>();
-    private List<Grade> grades = new ArrayList<>();
+    private static List<Student> students = new ArrayList<>();
+    private static List<Course> courses = new ArrayList<>();
+    private static List<Grade> grades = new ArrayList<>();
 
     public DataBase(){
         courses.add(new Course("WF", "Janek Stanek"));
