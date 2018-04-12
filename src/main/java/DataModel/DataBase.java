@@ -10,7 +10,7 @@ public class DataBase {
     private static List<Course> courses = new ArrayList<>();
     private static List<Grade> grades = new ArrayList<>();
 
-    public DataBase(){
+    static{
         courses.add(new Course("WF", "Janek Stanek"));
         courses.add(new Course("IT", "Robert Brylewski"));
         courses.add(new Course("Integracja", "Patryk Kuśmierkiewicz"));
@@ -36,11 +36,11 @@ public class DataBase {
         students.add(new Student("Przemysław", "Wojtczak", new Date(1994, 4, 1), grades));
     }
 
-    public List<Student> getStudents(){
+    public static List<Student> getStudents(){
         return students;
     }
 
-    public Student getStudentByIndex(int index){
+    public static Student getStudentByIndex(int index){
         for(Student student : students){
             if(student.getIndex() == index)
                 return student;
@@ -48,7 +48,7 @@ public class DataBase {
         return null;
     }
 
-    public List<Grade> getStudentByIndexGrades(int index){
+    public static List<Grade> getStudentByIndexGrades(int index){
         for(Student student : students){
             if(student.getIndex() == index)
                 return student.getGrades();
@@ -56,7 +56,7 @@ public class DataBase {
         return null;
     }
 
-    public Grade getStudentByIndexGradeById(int index, int id){
+    public static Grade getStudentByIndexGradeById(int index, int id){
         for(Student student : students){
             if(student.getIndex() == index)
                 for(Grade grade : student.getGrades()){
@@ -67,14 +67,14 @@ public class DataBase {
         return null;
     }
 
-    public void postStudent(Student student){
+    public static void postStudent(Student student){
         students.add(student);
     }
 
-    public Response putStudent(int index, Student newStudent){
+    public static Response putStudent(int index, Student newStudent){
         for(Student student : students) {
             if (student.getIndex() == index) {
-                student.setIndex(newStudent.getIndex());
+                //student.setIndex(newStudent.getIndex());
                 student.setGrades(newStudent.getGrades());
                 student.setBirthDate(newStudent.getBirthDate());
                 student.setFirstName(newStudent.getFirstName());
@@ -82,11 +82,12 @@ public class DataBase {
                 return Response.status(Response.Status.OK).build();
             }
         }
+        newStudent.setIndex(index);
         students.add(newStudent);
         return Response.status(Response.Status.CREATED).build();
     }
 
-    public Response deleteStudent(int index){
+    public static Response deleteStudent(int index){
         if(students.remove(getStudentByIndex(index)))
             return Response.status(Response.Status.OK).build();
         else
@@ -94,11 +95,11 @@ public class DataBase {
 
     }
 
-    public List<Course> getCourses(){
+    public static List<Course> getCourses(){
         return courses;
     }
 
-    public Course getCourseById(int id){
+    public static Course getCourseById(int id){
         for(Course course : courses){
             if (course.getId() == id)
                 return course;
@@ -106,7 +107,7 @@ public class DataBase {
         return null;
     }
 
-    private Course getCourseByName(String name){
+    private static Course getCourseByName(String name){
         for(Course course : courses){
             if (course.getName() == name)
                 return course;
@@ -114,11 +115,11 @@ public class DataBase {
         return null;
     }
 
-    public void postCourse(Course course){
+    public static void postCourse(Course course){
         courses.add(course);
     }
 
-    public Response putCourse(int id, Course newCourse){
+    public static Response putCourse(int id, Course newCourse){
         for(Course course : courses) {
             if (course.getId() == id) {
                 course.setId(newCourse.getId());
@@ -131,7 +132,7 @@ public class DataBase {
         return Response.status(Response.Status.CREATED).build();
     }
 
-    public Response deleteCourse(int id){
+    public static Response deleteCourse(int id){
         if(courses.remove(getCourseById(id)))
             return Response.status(Response.Status.OK).build();
         else
@@ -139,7 +140,7 @@ public class DataBase {
 
     }
 
-    public void postGrade(int index, Grade grade){
+    public static void postGrade(int index, Grade grade){
         for(Student student : students){
             if (student.getIndex() == index){
                 List<Grade> _grades = student.getGrades();
@@ -149,7 +150,7 @@ public class DataBase {
         }
     }
 
-    public Response putGrade(int index, int id, Grade newGrade){
+    public static Response putGrade(int index, int id, Grade newGrade){
         for (Student student : students){
             if (student.getIndex() == index){
                 for(Grade grade : student.getGrades()) {
@@ -170,7 +171,7 @@ public class DataBase {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-    public Response deleteGrade(int index, int id){
+    public static Response deleteGrade(int index, int id){
         for(Student student : students){
             if (student.getIndex() == index){
                 if(student.getGrades().remove(getStudentByIndexGradeById(index, id)))
