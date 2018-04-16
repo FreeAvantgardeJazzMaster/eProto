@@ -67,7 +67,7 @@ public class Student {
         this.grades = grades;
     }
 
-    private void addGrade(Grade grade){
-        grades.add(grade);
-    }
+   // private void addGrade(Grade grade){
+   //     grades.add(grade);
+   // }
 }
