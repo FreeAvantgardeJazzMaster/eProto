@@ -4,11 +4,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @XmlRootElement
 public class Student {
-    private static final AtomicInteger count = new AtomicInteger(0);
     private int index;
     private String firstName;
     private String lastName;
@@ -55,19 +53,13 @@ public class Student {
         this.grades = grades;
     }
 
-    public Student(){
-        this.index = count.incrementAndGet();
-    }
+    public Student(){ }
 
-    public Student(String firstName, String lastName, Date birthDate, List<Grade> grades){
+    public Student(String firstName, String lastName, Date birthDate, List<Grade> grades, int index){
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
-        this.index = count.incrementAndGet();
+        this.index = index;
         this.grades = grades;
     }
-
-   // private void addGrade(Grade grade){
-   //     grades.add(grade);
-   // }
 }

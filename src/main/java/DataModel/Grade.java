@@ -2,11 +2,9 @@ package DataModel;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @XmlRootElement
 public class Grade {
-    private static final AtomicInteger count = new AtomicInteger(0);
     private int id;
     private float value;
     private Date date;
@@ -46,14 +44,13 @@ public class Grade {
 
     public Grade(){
         this.date = new Date();
-        this.id = count.incrementAndGet();
     }
 
-    public Grade(float value, Course course){
+    public Grade(float value, Course course, int id){
         this.course = course;
         this.date = new Date();
         this.value = value;
-        this.id = count.incrementAndGet();
+        this.id = id;
     }
 
 }

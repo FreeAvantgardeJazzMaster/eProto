@@ -8,15 +8,11 @@ import DataModel.Student;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
+
 
 @Path("/")
 public class Service {
-
-    //private DataBase dataBase = new DataBase();
 
     @GET
     @Path("/students")
@@ -41,11 +37,15 @@ public class Service {
     public List<Grade> getStudentGrades(@PathParam("index") int index){
         return DataBase.getStudentByIndexGrades(index);
     }
+
     @GET
     @Path("/students/{index}/grades/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Grade getStudentGrade(@PathParam("index") int index, @PathParam("id") int id){
-        return DataBase.getStudentByIndexGradeById(index, id);
+        if(DataBase.getStudentByIndexGradeById(index, id) != null)
+            return DataBase.getStudentByIndexGradeById(index, id);
+        else
+            throw new NotFoundException(new JsonError("Error", "Grade " + String.valueOf(id) + " of Student " + String.valueOf(index) + " not found."));
     }
 
     @GET
@@ -59,7 +59,10 @@ public class Service {
     @Path("/courses/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Course getCourses(@PathParam("id") int id){
-        return DataBase.getCourseById(id);
+        if (DataBase.getCourseById(id) != null)
+            return DataBase.getCourseById(id);
+        else
+            throw new NotFoundException(new JsonError("Error", "Course " + String.valueOf(id) + " not found"));
     }
 
 
@@ -67,22 +70,23 @@ public class Service {
     @Path("/students")
     public Response postStudent (Student student) {
         DataBase.postStudent(student);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students").build();
     }
 
     @POST
     @Path("/courses")
     public Response postCourse(Course course){
         DataBase.postCourse(course);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/courses").build();
     }
 
     @POST
     @Path("/students/{index}/grades")
     public Response postGrade(@PathParam("index") int index, Grade grade){
         DataBase.postGrade(index, grade);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + index + "/grades").build();
     }
+
 
     @PUT
     @Path("students/{index}")
@@ -101,6 +105,7 @@ public class Service {
     public Response putGrade(@PathParam("index") int index, @PathParam("id") int id, Grade grade){
         return DataBase.putGrade(index, id, grade);
     }
+
 
     @DELETE
     @Path("/students/{index}")

@@ -1,11 +1,9 @@
 package DataModel;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @XmlRootElement
 public class Course {
-    private static final AtomicInteger count = new AtomicInteger(0);
     private int id;
     private String name;
     private String lecturer;
@@ -34,12 +32,11 @@ public class Course {
         this.name = name;
     }
 
-    public Course(){
-        this.id = count.incrementAndGet();
-    }
-    public Course(String name, String lecturer){
+    public Course(){ }
+
+    public Course(String name, String lecturer, int id){
         this.name = name;
         this.lecturer = lecturer;
-        this.id = count.incrementAndGet();
+        this.id = id;
     }
 }
