@@ -20,24 +20,27 @@ public class DataBase {
         courses.add(new Course("Integracja", "Patryk Kuśmierkiewicz", courseCounter.incrementAndGet()));
 
 
-        grades.add(new Grade((float) 3.5, getCourseByName("WF"), gradeCounter.incrementAndGet()));
-        grades.add(new Grade((float) 4, getCourseByName("IT"), gradeCounter.incrementAndGet()));
-        grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet()));
-        students.add(new Student("Adam", "Kokosza", new Date(1995, 8, 10), grades, studentCounter.incrementAndGet()));
+        int studentIndex = studentCounter.incrementAndGet();
+        grades.add(new Grade((float) 3.5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
+        grades.add(new Grade((float) 4, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
+        grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+        students.add(new Student("Adam", "Kokosza", new Date(1995, 8, 10), grades, studentIndex));
 
         grades = new ArrayList<>();
 
-        grades.add(new Grade((float) 5, getCourseByName("WF"), gradeCounter.incrementAndGet()));
-        grades.add(new Grade((float) 5, getCourseByName("IT"), gradeCounter.incrementAndGet()));
-        grades.add(new Grade((float) 3, getCourseByName("Integracja"), gradeCounter.incrementAndGet()));
-        students.add(new Student("Murzynek", "Bambo", new Date(1995, 12, 24), grades, studentCounter.incrementAndGet()));
+        studentIndex = studentCounter.incrementAndGet();
+        grades.add(new Grade((float) 5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
+        grades.add(new Grade((float) 5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
+        grades.add(new Grade((float) 3, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+        students.add(new Student("Murzynek", "Bambo", new Date(1995, 12, 24), grades, studentIndex));
 
         grades = new ArrayList<>();
 
-        grades.add(new Grade((float) 4, getCourseByName("WF"), gradeCounter.incrementAndGet()));
-        grades.add(new Grade((float) 4.5, getCourseByName("IT"), gradeCounter.incrementAndGet()));
-        grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet()));
-        students.add(new Student("Przemysław", "Wojtczak", new Date(1994, 4, 1), grades, studentCounter.incrementAndGet()));
+        studentIndex = studentCounter.incrementAndGet();
+        grades.add(new Grade((float) 4, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
+        grades.add(new Grade((float) 4.5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
+        grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+        students.add(new Student("Przemysław", "Wojtczak", new Date(1994, 4, 1), grades, studentIndex));
     }
 
     private static int getFirstAvailableStudentIndex(){
@@ -248,6 +251,7 @@ public class DataBase {
                 for(Grade grade : student.getGrades()) {
                     if (grade.getId() == id) {
                         //grade.setId(newGrade.getId());
+                        grade.setStudentIndex(index);
                         grade.setValue(newGrade.getValue());
                         grade.setCourse(newGrade.getCourse());
                         grade.setDate(newGrade.getDate());
@@ -256,6 +260,7 @@ public class DataBase {
                 }
                 List<Grade> _grades = student.getGrades();
                 newGrade.setId(getPreferredGradeId(id));
+                newGrade.setStudentIndex(index);
                 _grades.add(newGrade);
                 student.setGrades(_grades);
                 return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + index + "/grades/" + newGrade.getId()).build();

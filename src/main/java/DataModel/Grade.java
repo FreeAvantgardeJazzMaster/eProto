@@ -1,7 +1,16 @@
 package DataModel;
 
+import org.glassfish.jersey.linking.InjectLink;
+import org.glassfish.jersey.linking.InjectLinks;
+
+import javax.ws.rs.core.Link;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
+import java.util.List;
 
 @XmlRootElement
 public class Grade {
@@ -9,6 +18,16 @@ public class Grade {
     private float value;
     private Date date;
     private Course course;
+    private int studentIndex;
+
+    @InjectLinks({
+            @InjectLink(value = "/students/{studentIndex}/grades/{id}", rel = "self"),
+            @InjectLink(value = "/students/{studentIndex}/grades", rel = "parent")
+    })
+    @XmlElement(name = "link")
+    @XmlElementWrapper(name = "links")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
+    List<Link> links;
 
     public int getId() {
         return id;
@@ -42,15 +61,24 @@ public class Grade {
         this.value = value;
     }
 
+    public void setStudentIndex(int studentIndex) {
+        this.studentIndex = studentIndex;
+    }
+    @XmlTransient
+    public int getStudentIndex() {
+        return studentIndex;
+    }
+
     public Grade(){
         this.date = new Date();
     }
 
-    public Grade(float value, Course course, int id){
+    public Grade(float value, Course course, int id, int studentIndex){
         this.course = course;
         this.date = new Date();
         this.value = value;
         this.id = id;
+        this.studentIndex = studentIndex;
     }
 
 }

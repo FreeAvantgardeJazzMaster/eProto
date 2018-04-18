@@ -18,7 +18,7 @@ public class Service {
     @Path("/students")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Student> getStudents(){
-        return DataBase.getStudents();
+            return DataBase.getStudents();
     }
 
     @GET
