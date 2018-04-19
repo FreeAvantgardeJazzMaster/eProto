@@ -24,7 +24,7 @@ public class DataBase {
         grades.add(new Grade((float) 3.5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
         grades.add(new Grade((float) 4, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
         grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
-        students.add(new Student("Adam", "Kokosza", new Date(1995, 8, 10), grades, studentIndex));
+        students.add(new Student("Adam", "Kokosza", new Date(95, 8, 10), grades, studentIndex));
 
         grades = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class DataBase {
         grades.add(new Grade((float) 5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
         grades.add(new Grade((float) 5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
         grades.add(new Grade((float) 3, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
-        students.add(new Student("Murzynek", "Bambo", new Date(1995, 12, 24), grades, studentIndex));
+        students.add(new Student("Murzynek", "Bambo", new Date(95, 12, 24), grades, studentIndex));
 
         grades = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class DataBase {
         grades.add(new Grade((float) 4, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
         grades.add(new Grade((float) 4.5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
         grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
-        students.add(new Student("Przemysław", "Wojtczak", new Date(1994, 4, 1), grades, studentIndex));
+        students.add(new Student("Przemysław", "Wojtczak", new Date(94, 4, 1), grades, studentIndex));
     }
 
     private static int getFirstAvailableStudentIndex(){
@@ -158,9 +158,11 @@ public class DataBase {
         return null;
     }
 
-    public static void postStudent(Student student){
+    public static Student postStudent(Student student){
         student.setIndex(DataBase.getFirstAvailableStudentIndex());
         students.add(student);
+
+        return student;
     }
 
     public static Response putStudent(int index, Student newStudent){

@@ -69,8 +69,8 @@ public class Service {
     @POST
     @Path("/students")
     public Response postStudent (Student student) {
-        DataBase.postStudent(student);
-        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students").build();
+        Student newStudent = DataBase.postStudent(student);
+        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + newStudent.getIndex()).build();
     }
 
     @POST
