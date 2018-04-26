@@ -1,12 +1,16 @@
 package DataModel;
 
+import Main.DatabaseInit;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class DataBase {
+public class DataAccess {
     private static List<Student> students = new ArrayList<>();
     private static List<Course> courses = new ArrayList<>();
     private static List<Grade> grades = new ArrayList<>();
@@ -15,32 +19,41 @@ public class DataBase {
     private static AtomicInteger courseCounter = new AtomicInteger(0);
     private static AtomicInteger gradeCounter = new AtomicInteger(0);
     static{
-        courses.add(new Course("WF", "Janek Stanek", courseCounter.incrementAndGet()));
-        courses.add(new Course("IT", "Robert Brylewski", courseCounter.incrementAndGet()));
-        courses.add(new Course("Integracja", "Patryk Kuśmierkiewicz", courseCounter.incrementAndGet()));
+
+        Datastore datastore = DatabaseInit.getDatastore();
+
+        if (!(datastore.getCount(Student.class) > 0)) {
+
+            courses.add(new Course("WF", "Janek Stanek", courseCounter.incrementAndGet()));
+            courses.add(new Course("IT", "Robert Brylewski", courseCounter.incrementAndGet()));
+            courses.add(new Course("Integracja", "Patryk Kuśmierkiewicz", courseCounter.incrementAndGet()));
 
 
-        int studentIndex = studentCounter.incrementAndGet();
-        grades.add(new Grade((float) 3.5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
-        grades.add(new Grade((float) 4, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
-        grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
-        students.add(new Student("Adam", "Kokosza", new Date(95, 8, 10), grades, studentIndex));
+            int studentIndex = studentCounter.incrementAndGet();
+            grades.add(new Grade((float) 3.5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 4, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+            students.add(new Student("Adam", "Kokosza", new Date(95, 8, 10), grades, studentIndex));
 
-        grades = new ArrayList<>();
+            grades = new ArrayList<>();
 
-        studentIndex = studentCounter.incrementAndGet();
-        grades.add(new Grade((float) 5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
-        grades.add(new Grade((float) 5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
-        grades.add(new Grade((float) 3, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
-        students.add(new Student("Murzynek", "Bambo", new Date(95, 12, 24), grades, studentIndex));
+            studentIndex = studentCounter.incrementAndGet();
+            grades.add(new Grade((float) 5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 3, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+            students.add(new Student("Murzynek", "Bambo", new Date(95, 12, 24), grades, studentIndex));
 
-        grades = new ArrayList<>();
+            grades = new ArrayList<>();
 
-        studentIndex = studentCounter.incrementAndGet();
-        grades.add(new Grade((float) 4, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
-        grades.add(new Grade((float) 4.5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
-        grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
-        students.add(new Student("Przemysław", "Wojtczak", new Date(94, 4, 1), grades, studentIndex));
+            studentIndex = studentCounter.incrementAndGet();
+            grades.add(new Grade((float) 4, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 4.5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+            students.add(new Student("Przemysław", "Wojtczak", new Date(94, 4, 1), grades, studentIndex));
+
+
+            datastore.save(students);
+        }
     }
 
     private static int getFirstAvailableStudentIndex(){
@@ -159,7 +172,7 @@ public class DataBase {
     }
 
     public static Student postStudent(Student student){
-        student.setIndex(DataBase.getFirstAvailableStudentIndex());
+        student.setIndex(DataAccess.getFirstAvailableStudentIndex());
         students.add(student);
 
         return student;
@@ -210,7 +223,7 @@ public class DataBase {
     }
 
     public static void postCourse(Course course){
-        course.setId(DataBase.getFirstAvailableCourseId());
+        course.setId(DataAccess.getFirstAvailableCourseId());
         courses.add(course);
     }
 
