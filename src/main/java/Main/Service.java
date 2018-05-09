@@ -1,7 +1,7 @@
 package Main;
 
 import DataModel.Course;
-import DataModel.DataAccess;
+import DataAccess.DataAccess;
 import DataModel.Grade;
 import DataModel.Student;
 import Utils.JsonError;
@@ -80,8 +80,8 @@ public class Service {
     @POST
     @Path("/courses")
     public Response postCourse(Course course){
-        DataAccess.postCourse(course);
-        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/courses").build();
+        Course newCourse = DataAccess.postCourse(course);
+        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/courses" + newCourse.getId()).build();
     }
 
     @POST

@@ -17,10 +17,11 @@ import java.util.List;
 @XmlRootElement
 @Entity("courses")
 public class Course {
+
     @Id
     @XmlTransient
-    //@XmlJavaTypeAdapter(ObjectIdJaxbAdapter.class)
-    private ObjectId ID;
+    private ObjectId objectId;
+
     private int id;
     private String name;
     private String lecturer;
@@ -33,14 +34,6 @@ public class Course {
     @XmlElementWrapper(name = "links")
     @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     List<Link> links;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getLecturer() {
         return lecturer;
@@ -58,7 +51,7 @@ public class Course {
         this.name = name;
     }
 
-    public Course(){ }
+    public Course(){}
 
     public Course(String name, String lecturer, int id){
         this.name = name;
@@ -66,11 +59,19 @@ public class Course {
         this.id = id;
     }
     @XmlTransient
-    public ObjectId getID() {
-        return ID;
+    public ObjectId getObjectId() {
+        return objectId;
+    }
+    @XmlTransient
+    public void setObjectId(ObjectId objectId) {
+        this.objectId = objectId;
     }
 
-    public void setID(ObjectId ID) {
-        this.ID = ID;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,6 @@
-package DataModel;
+package DataAccess;
 
-import DataAccess.StudentAdapter;
+import DataModel.*;
 import Main.DatabaseInit;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
@@ -17,8 +17,6 @@ public class DataAccess {
     private static List<Course> courses = new ArrayList<>();
     private static List<Grade> grades = new ArrayList<>();
 
-    private static AtomicInteger studentCounter = new AtomicInteger(0);
-    private static AtomicInteger courseCounter = new AtomicInteger(0);
     private static AtomicInteger gradeCounter = new AtomicInteger(0);
 
     private static Datastore datastore = DatabaseInit.getDatastore();
@@ -29,38 +27,48 @@ public class DataAccess {
             datastore.save(studentIndex);
         }
 
+        if (!(datastore.getCount(CourseID.class) > 0)){
+            CourseID courseID = new CourseID(0);
+            datastore.save(courseID);
+        }
+
+        if (!(datastore.getCount(GradeID.class) > 0)){
+            GradeID gradeID = new GradeID(0);
+            datastore.save(gradeID);
+        }
+
         if (!(datastore.getCount(Student.class) > 0)) {
 
-            courses.add(new Course("WF", "Janek Stanek", courseCounter.incrementAndGet()));
-            courses.add(new Course("IT", "Robert Brylewski", courseCounter.incrementAndGet()));
-            courses.add(new Course("Integracja", "Patryk Kuśmierkiewicz", courseCounter.incrementAndGet()));
+            courses.add(new Course("WF", "Janek Stanek", getCourseId()));
+            courses.add(new Course("IT", "Robert Brylewski", getCourseId()));
+            courses.add(new Course("Integracja", "Patryk Kuśmierkiewicz", getCourseId()));
+            datastore.save(courses);
 
 
             int studentIndex = getStudentIndex();
-            grades.add(new Grade((float) 3.5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
-            grades.add(new Grade((float) 4, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
-            grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 3.5, getCourseByName("WF"), getGradeId(), studentIndex));
+            grades.add(new Grade((float) 4, getCourseByName("IT"), getGradeId(), studentIndex));
+            grades.add(new Grade((float) 5, getCourseByName("Integracja"), getGradeId(), studentIndex));
             students.add(new Student("Adam", "Kokosza", new Date(95, 8, 10), grades, studentIndex));
 
             grades = new ArrayList<>();
 
             studentIndex = getStudentIndex();
-            grades.add(new Grade((float) 5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
-            grades.add(new Grade((float) 5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
-            grades.add(new Grade((float) 3, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 5, getCourseByName("WF"), getGradeId(), studentIndex));
+            grades.add(new Grade((float) 5, getCourseByName("IT"), getGradeId(), studentIndex));
+            grades.add(new Grade((float) 3, getCourseByName("Integracja"), getGradeId(), studentIndex));
             students.add(new Student("Murzynek", "Bambo", new Date(95, 12, 24), grades, studentIndex));
 
             grades = new ArrayList<>();
 
             studentIndex = getStudentIndex();
-            grades.add(new Grade((float) 4, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
-            grades.add(new Grade((float) 4.5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
-            grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
+            grades.add(new Grade((float) 4, getCourseByName("WF"), getGradeId(), studentIndex));
+            grades.add(new Grade((float) 4.5, getCourseByName("IT"), getGradeId(), studentIndex));
+            grades.add(new Grade((float) 5, getCourseByName("Integracja"), getGradeId(), studentIndex));
             students.add(new Student("Przemysław", "Wojtczak", new Date(94, 4, 1), grades, studentIndex));
 
 
             datastore.save(students);
-            datastore.save(courses);
         }
     }
 
@@ -68,6 +76,24 @@ public class DataAccess {
         Query<StudentIndex> query = datastore.find(StudentIndex.class);
         int id = query.get().getIndexCount() + 1;
         UpdateOperations<StudentIndex> updateOperations = datastore.createUpdateOperations(StudentIndex.class).set("indexCount", id);
+        datastore.findAndModify(query, updateOperations);
+
+        return id;
+    }
+
+    private static int getCourseId(){
+        Query<CourseID> query = datastore.find(CourseID.class);
+        int id = query.get().getId() + 1;
+        UpdateOperations<CourseID> updateOperations = datastore.createUpdateOperations(CourseID.class).set("id", id);
+        datastore.findAndModify(query, updateOperations);
+
+        return id;
+    }
+
+    private static int getGradeId(){
+        Query<GradeID> query = datastore.find(GradeID.class);
+        int id = query.get().getId() + 1;
+        UpdateOperations<GradeID> updateOperations = datastore.createUpdateOperations(GradeID.class).set("id", id);
         datastore.findAndModify(query, updateOperations);
 
         return id;
@@ -103,11 +129,9 @@ public class DataAccess {
         int id = 0;
         while(isFound) {
             isFound = false;
-            id = courseCounter.incrementAndGet();
-            for (Course course : courses) {
-                if (id == course.getId())
-                    isFound = true;
-            }
+            id = getCourseId();
+            if (CourseAdapter.getCourseById(id) != null)
+                isFound = true;
         }
         return id;
     }
@@ -203,46 +227,39 @@ public class DataAccess {
 
 
     public static List<Course> getCourses(){
-        return courses;
+        return CourseAdapter.getCourses();
     }
 
     public static Course getCourseById(int id){
-        for(Course course : courses){
-            if (course.getId() == id)
-                return course;
-        }
-        return null;
+        return CourseAdapter.getCourseById(id);
     }
 
     private static Course getCourseByName(String name){
-        for(Course course : courses){
-            if (course.getName() == name)
-                return course;
-        }
-        return null;
+        return CourseAdapter.getCourseByName(name);
     }
 
-    public static void postCourse(Course course){
+    public static Course postCourse(Course course){
         course.setId(DataAccess.getFirstAvailableCourseId());
-        courses.add(course);
+        CourseAdapter.addCourse(course);
+        return course;
     }
 
     public static Response putCourse(int id, Course newCourse){
-        for(Course course : courses) {
-            if (course.getId() == id) {
-                //course.setId(newCourse.getId());
-                course.setName(newCourse.getName());
-                course.setLecturer(newCourse.getLecturer());
-                return Response.status(Response.Status.OK).build();
-            }
+        Course course = CourseAdapter.getCourseById(id);
+        if (course != null) {
+            course.setName(newCourse.getName());
+            course.setLecturer(newCourse.getLecturer());
+            CourseAdapter.updateCourse(course);
+            return Response.status(Response.Status.OK).build();
         }
-        newCourse.setId(getPreferredCourseId(id));
-        courses.add(newCourse);
+
+        newCourse.setId(id);
+        CourseAdapter.addCourse(newCourse);
         return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/courses/" + newCourse.getId()).build();
     }
 
     public static Response deleteCourse(int id){
-        if(courses.remove(getCourseById(id)))
+        if(CourseAdapter.deleteCourse(id))
             return Response.status(Response.Status.OK).build();
         else
             return Response.status(Response.Status.NO_CONTENT).build();
@@ -251,48 +268,47 @@ public class DataAccess {
 
 
     public static void postGrade(int index, Grade grade){
-        for(Student student : students){
-            if (student.getIndex() == index){
-                List<Grade> _grades = student.getGrades();
-                grade.setId(getFirstAvailableGradeId());
-                _grades.add(grade);
-                student.setGrades(_grades);
-            }
-        }
+        List<Grade> grades = StudentAdapter.getStudentByIndexGrades(index);
+        grade.setId(getGradeId());
+        grades.add(grade);
+        Student student = getStudentByIndex(index);
+        student.setGrades(grades);
+
+        StudentAdapter.updateStudent(student);
     }
 
     public static Response putGrade(int index, int id, Grade newGrade){
-        for (Student student : students){
-            if (student.getIndex() == index){
-                for(Grade grade : student.getGrades()) {
-                    if (grade.getId() == id) {
-                        //grade.setId(newGrade.getId());
-                        grade.setStudentIndex(index);
-                        grade.setValue(newGrade.getValue());
-                        grade.setCourse(newGrade.getCourse());
-                        grade.setDate(newGrade.getDate());
-                        return Response.status(Response.Status.OK).build();
-                    }
+        Student student = StudentAdapter.getStudentByIndex(index);
+        if (student != null){
+            for(Grade grade : student.getGrades()) {
+                if (grade.getId() == id) {
+                    grade.setStudentIndex(index);
+                    grade.setValue(newGrade.getValue());
+                    grade.setCourse(newGrade.getCourse());
+                    grade.setDate(newGrade.getDate());
+                    StudentAdapter.updateStudent(student);
+                    return Response.status(Response.Status.OK).build();
                 }
-                List<Grade> _grades = student.getGrades();
-                newGrade.setId(getPreferredGradeId(id));
-                newGrade.setStudentIndex(index);
-                _grades.add(newGrade);
-                student.setGrades(_grades);
-                return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + index + "/grades/" + newGrade.getId()).build();
             }
+            List<Grade> grades = StudentAdapter.getStudentByIndexGrades(index);
+            newGrade.setId(getGradeId());
+            grades.add(newGrade);
+            student.setGrades(grades);
+            StudentAdapter.updateStudent(student);
+            return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + index + "/grades/" + newGrade.getId()).build();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     public static Response deleteGrade(int index, int id){
-        for(Student student : students){
-            if (student.getIndex() == index){
-                if(student.getGrades().remove(getStudentByIndexGradeById(index, id)))
-                    return Response.status(Response.Status.OK).build();
-                else
-                    return Response.status(Response.Status.NO_CONTENT).build();
+        Student student = getStudentByIndex(index);
+        if (student != null){
+            if(student.getGrades().remove(getStudentByIndexGradeById(index, id))) {
+                StudentAdapter.updateStudent(student);
+                return Response.status(Response.Status.OK).build();
             }
+            else
+                return Response.status(Response.Status.NO_CONTENT).build();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }

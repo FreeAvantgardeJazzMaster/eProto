@@ -18,6 +18,7 @@ public class Grade {
     private float value;
     private Date date;
     private Course course;
+    @XmlTransient
     private int studentIndex;
 
     @InjectLinks({
@@ -64,7 +65,7 @@ public class Grade {
     public void setStudentIndex(int studentIndex) {
         this.studentIndex = studentIndex;
     }
-    @XmlTransient
+
     public int getStudentIndex() {
         return studentIndex;
     }
