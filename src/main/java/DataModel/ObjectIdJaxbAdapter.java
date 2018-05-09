@@ -1,4 +1,4 @@
-package Main;
+package DataModel;
 
 import org.bson.types.ObjectId;
 

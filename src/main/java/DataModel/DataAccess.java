@@ -1,8 +1,10 @@
 package DataModel;
 
+import DataAccess.StudentAdapter;
 import Main.DatabaseInit;
 import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -18,9 +20,14 @@ public class DataAccess {
     private static AtomicInteger studentCounter = new AtomicInteger(0);
     private static AtomicInteger courseCounter = new AtomicInteger(0);
     private static AtomicInteger gradeCounter = new AtomicInteger(0);
+
+    private static Datastore datastore = DatabaseInit.getDatastore();
     static{
 
-        Datastore datastore = DatabaseInit.getDatastore();
+        if (!(datastore.getCount(StudentIndex.class) > 0)){
+            StudentIndex studentIndex = new StudentIndex(0);
+            datastore.save(studentIndex);
+        }
 
         if (!(datastore.getCount(Student.class) > 0)) {
 
@@ -29,7 +36,7 @@ public class DataAccess {
             courses.add(new Course("Integracja", "Patryk Kuśmierkiewicz", courseCounter.incrementAndGet()));
 
 
-            int studentIndex = studentCounter.incrementAndGet();
+            int studentIndex = getStudentIndex();
             grades.add(new Grade((float) 3.5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
             grades.add(new Grade((float) 4, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
             grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
@@ -37,7 +44,7 @@ public class DataAccess {
 
             grades = new ArrayList<>();
 
-            studentIndex = studentCounter.incrementAndGet();
+            studentIndex = getStudentIndex();
             grades.add(new Grade((float) 5, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
             grades.add(new Grade((float) 5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
             grades.add(new Grade((float) 3, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
@@ -45,7 +52,7 @@ public class DataAccess {
 
             grades = new ArrayList<>();
 
-            studentIndex = studentCounter.incrementAndGet();
+            studentIndex = getStudentIndex();
             grades.add(new Grade((float) 4, getCourseByName("WF"), gradeCounter.incrementAndGet(), studentIndex));
             grades.add(new Grade((float) 4.5, getCourseByName("IT"), gradeCounter.incrementAndGet(), studentIndex));
             grades.add(new Grade((float) 5, getCourseByName("Integracja"), gradeCounter.incrementAndGet(), studentIndex));
@@ -53,19 +60,28 @@ public class DataAccess {
 
 
             datastore.save(students);
+            datastore.save(courses);
         }
     }
+
+    private static int getStudentIndex(){
+        Query<StudentIndex> query = datastore.find(StudentIndex.class);
+        int id = query.get().getIndexCount() + 1;
+        UpdateOperations<StudentIndex> updateOperations = datastore.createUpdateOperations(StudentIndex.class).set("indexCount", id);
+        datastore.findAndModify(query, updateOperations);
+
+        return id;
+    }
+
 
     private static int getFirstAvailableStudentIndex(){
         boolean isFound = true;
         int index = 0;
         while(isFound) {
             isFound = false;
-            index = studentCounter.incrementAndGet();
-            for (Student student : students) {
-                if (index == student.getIndex())
-                    isFound = true;
-            }
+            index = getStudentIndex();
+            if (StudentAdapter.getStudentByIndex(index) != null)
+                isFound = true;
         }
         return index;
     }
@@ -74,11 +90,9 @@ public class DataAccess {
         boolean isFound = true;
         while(isFound) {
             isFound = false;
-            for (Student student : students) {
-                if (index == student.getIndex()) {
-                    isFound = true;
-                    index++;
-                }
+            if (StudentAdapter.getStudentByIndex(index) != null) {
+                isFound = true;
+                index++;
             }
         }
         return index;
@@ -140,67 +154,53 @@ public class DataAccess {
         return id;
     }
 
+
     public static List<Student> getStudents(){
-        return students;
+        return StudentAdapter.getStudents();
     }
 
     public static Student getStudentByIndex(int index){
-        for(Student student : students){
-            if(student.getIndex() == index)
-                return student;
-        }
-        return null;
+        return StudentAdapter.getStudentByIndex(index);
     }
 
     public static List<Grade> getStudentByIndexGrades(int index){
-        for(Student student : students){
-            if(student.getIndex() == index)
-                return student.getGrades();
-        }
-        return null;
+        return StudentAdapter.getStudentByIndexGrades(index);
     }
 
     public static Grade getStudentByIndexGradeById(int index, int id){
-        for(Student student : students){
-            if(student.getIndex() == index)
-                for(Grade grade : student.getGrades()){
-                    if(grade.getId() == id)
-                        return grade;
-                }
-        }
-        return null;
+        return StudentAdapter.getStudentByIndexGradesById(index, id);
     }
 
     public static Student postStudent(Student student){
-        student.setIndex(DataAccess.getFirstAvailableStudentIndex());
-        students.add(student);
+        student.setIndex(getFirstAvailableStudentIndex());
+        StudentAdapter.addStudent(student);
 
         return student;
     }
 
     public static Response putStudent(int index, Student newStudent){
-        for(Student student : students) {
-            if (student.getIndex() == index) {
-                //student.setIndex(newStudent.getIndex());
+        Student student = StudentAdapter.getStudentByIndex(index);
+            if (student != null) {
                 student.setGrades(newStudent.getGrades());
                 student.setBirthDate(newStudent.getBirthDate());
                 student.setFirstName(newStudent.getFirstName());
                 student.setLastName(newStudent.getLastName());
+                StudentAdapter.updateStudent(student);
+
                 return Response.status(Response.Status.OK).build();
             }
-        }
-        newStudent.setIndex(getPreferredStudentIndex(index));
-        students.add(newStudent);
+        newStudent.setIndex(index);
+        StudentAdapter.addStudent(newStudent);
         return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + newStudent.getIndex()).build();
     }
 
     public static Response deleteStudent(int index){
-        if(students.remove(getStudentByIndex(index)))
+        if(StudentAdapter.deleteStudent(index))
             return Response.status(Response.Status.OK).build();
         else
             return Response.status(Response.Status.NO_CONTENT).build();
-
     }
+
 
     public static List<Course> getCourses(){
         return courses;
@@ -248,6 +248,7 @@ public class DataAccess {
             return Response.status(Response.Status.NO_CONTENT).build();
 
     }
+
 
     public static void postGrade(int index, Grade grade){
         for(Student student : students){

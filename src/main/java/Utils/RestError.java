@@ -1,9 +1,9 @@
-package Main;
+package Utils;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-class RestError implements ExceptionMapper<Throwable> {
+public class RestError implements ExceptionMapper<Throwable> {
 
 
     @Override

@@ -4,6 +4,8 @@ import DataModel.Course;
 import DataModel.DataAccess;
 import DataModel.Grade;
 import DataModel.Student;
+import Utils.JsonError;
+import Utils.NotFoundException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,10 +27,11 @@ public class Service {
     @Path("/students/{index}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Student getStudentByIndex(@PathParam("index") int index){
-        if(DataAccess.getStudentByIndex(index) != null)
-            return DataAccess.getStudentByIndex(index);
+        Student student = DataAccess.getStudentByIndex(index);
+        if(student != null)
+            return student;
         else
-            throw new NotFoundException(new JsonError("Error", "Student " + String.valueOf(index) + " not found"));
+            throw new Utils.NotFoundException(new JsonError("Error", "Student " + String.valueOf(index) + " not found"));
     }
 
     @GET
@@ -42,10 +45,11 @@ public class Service {
     @Path("/students/{index}/grades/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Grade getStudentGrade(@PathParam("index") int index, @PathParam("id") int id){
-        if(DataAccess.getStudentByIndexGradeById(index, id) != null)
-            return DataAccess.getStudentByIndexGradeById(index, id);
+        Grade grade = DataAccess.getStudentByIndexGradeById(index, id);
+        if(grade != null)
+            return grade;
         else
-            throw new NotFoundException(new JsonError("Error", "Grade " + String.valueOf(id) + " of Student " + String.valueOf(index) + " not found."));
+            throw new Utils.NotFoundException(new JsonError("Error", "Grade " + String.valueOf(id) + " of Student " + String.valueOf(index) + " not found."));
     }
 
     @GET

@@ -1,4 +1,4 @@
-package Main;
+package Utils;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

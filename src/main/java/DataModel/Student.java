@@ -1,6 +1,5 @@
 package DataModel;
 
-import Main.ObjectIdJaxbAdapter;
 import org.bson.types.ObjectId;
 import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLinks;
@@ -30,11 +29,15 @@ public class Student {
     @XmlElementWrapper(name = "links")
     @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     List<Link> links;
+
     @Id
-    @XmlJavaTypeAdapter(ObjectIdJaxbAdapter.class)
+    @XmlTransient
+    //@XmlJavaTypeAdapter(ObjectIdJaxbAdapter.class)
     private ObjectId ID;
+
     @Indexed(name = "index", unique = true)
     private int index;
+
     private String firstName;
     private String lastName;
     private Date birthDate;

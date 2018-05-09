@@ -1,9 +1,9 @@
 package DataModel;
 
-import Main.ObjectIdJaxbAdapter;
 import org.bson.types.ObjectId;
 import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLinks;
+import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 import javax.ws.rs.core.Link;
@@ -15,9 +15,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.List;
 
 @XmlRootElement
+@Entity("courses")
 public class Course {
     @Id
-    @XmlJavaTypeAdapter(ObjectIdJaxbAdapter.class)
+    @XmlTransient
+    //@XmlJavaTypeAdapter(ObjectIdJaxbAdapter.class)
     private ObjectId ID;
     private int id;
     private String name;

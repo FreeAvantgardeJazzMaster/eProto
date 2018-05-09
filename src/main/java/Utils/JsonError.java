@@ -1,4 +1,4 @@
-package Main;
+package Utils;
 
 public class JsonError {
     private final String type;
