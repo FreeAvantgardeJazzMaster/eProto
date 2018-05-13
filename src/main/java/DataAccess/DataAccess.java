@@ -10,14 +10,11 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DataAccess {
     private static List<Student> students = new ArrayList<>();
     private static List<Course> courses = new ArrayList<>();
     private static List<Grade> grades = new ArrayList<>();
-
-    private static AtomicInteger gradeCounter = new AtomicInteger(0);
 
     private static Datastore datastore = DatabaseInit.getDatastore();
     static{
@@ -151,17 +148,7 @@ public class DataAccess {
     }
 
     private static int getFirstAvailableGradeId(){
-        boolean isFound = true;
-        int id = 0;
-        while(isFound) {
-            isFound = false;
-            id = gradeCounter.incrementAndGet();
-            for (Grade grade : grades) {
-                if (id == grade.getId())
-                    isFound = true;
-            }
-        }
-        return id;
+        return getGradeId();
     }
 
     private static int getPreferredGradeId(int id){
@@ -195,16 +182,34 @@ public class DataAccess {
         return StudentAdapter.getStudentByIndexGradesById(index, id);
     }
 
-    public static Student postStudent(Student student){
+    public static Response postStudent(Student student){
         student.setIndex(getFirstAvailableStudentIndex());
+        List<Grade> grades = student.getGrades();
+        if (grades != null){
+            for (Grade grade : grades){
+                grade.setId(getFirstAvailableGradeId());
+                grade.setStudentIndex(student.getIndex());
+                Course gradesCourse = CourseAdapter.getCourseById(grade.getCourse().getId());
+                if (gradesCourse == null)
+                    return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ grade.getCourse().getId() +" not found").build();
+                grade.setCourse(gradesCourse);
+            }
+        }
         StudentAdapter.addStudent(student);
 
-        return student;
+        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + student.getIndex()).build();
     }
 
     public static Response putStudent(int index, Student newStudent){
         Student student = StudentAdapter.getStudentByIndex(index);
             if (student != null) {
+                List<Grade> grades = newStudent.getGrades();
+                for (Grade grade : grades){
+                    Course course = CourseAdapter.getCourseById(grade.getCourse().getId());
+                    if (course == null)
+                        return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ grade.getCourse().getId() +" not found").build();
+                    grade.setCourse(course);
+                }
                 student.setGrades(newStudent.getGrades());
                 student.setBirthDate(newStudent.getBirthDate());
                 student.setFirstName(newStudent.getFirstName());
@@ -259,8 +264,21 @@ public class DataAccess {
     }
 
     public static Response deleteCourse(int id){
-        if(CourseAdapter.deleteCourse(id))
+        List<Student> students = getStudents();
+        if(CourseAdapter.deleteCourse(id)) {
+            for (Student student : students){
+                List<Grade> grades = student.getGrades();
+                List<Grade> copyOfGrades = new ArrayList<>(grades);
+                for (Grade grade : grades){
+                    if (grade.getCourse().getId() == id){
+                        copyOfGrades.remove(grade);
+                    }
+                }
+                student.setGrades(copyOfGrades);
+                StudentAdapter.updateStudent(student);
+            }
             return Response.status(Response.Status.OK).build();
+        }
         else
             return Response.status(Response.Status.NO_CONTENT).build();
 
@@ -288,18 +306,27 @@ public class DataAccess {
     public static Response putGrade(int index, int id, Grade newGrade){
         Student student = StudentAdapter.getStudentByIndex(index);
         if (student != null){
-            for(Grade grade : student.getGrades()) {
-                if (grade.getId() == id) {
-                    grade.setStudentIndex(index);
-                    grade.setValue(newGrade.getValue());
-                    grade.setCourse(newGrade.getCourse());
-                    grade.setDate(newGrade.getDate());
-                    StudentAdapter.updateStudent(student);
-                    return Response.status(Response.Status.OK).build();
+            if(student.getGrades() != null) {
+                for (Grade grade : student.getGrades()) {
+                    if (grade.getId() == id) {
+                        grade.setValue(newGrade.getValue());
+                        Course course = CourseAdapter.getCourseById(newGrade.getCourse().getId());
+                        if (course == null)
+                            return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ newGrade.getCourse().getId() +" not found").build();
+                        grade.setCourse(course);
+                        grade.setDate(newGrade.getDate());
+                        StudentAdapter.updateStudent(student);
+                        return Response.status(Response.Status.OK).build();
+                    }
                 }
             }
             List<Grade> grades = StudentAdapter.getStudentByIndexGrades(index);
             newGrade.setId(getGradeId());
+            newGrade.setStudentIndex(index);
+            Course course = CourseAdapter.getCourseById(newGrade.getCourse().getId());
+            if (course == null)
+                return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ newGrade.getCourse().getId() +" not found").build();
+            newGrade.setCourse(course);
             grades.add(newGrade);
             student.setGrades(grades);
             StudentAdapter.updateStudent(student);

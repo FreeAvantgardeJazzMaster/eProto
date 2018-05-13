@@ -73,8 +73,7 @@ public class Service {
     @POST
     @Path("/students")
     public Response postStudent (Student student) {
-        Student newStudent = DataAccess.postStudent(student);
-        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + newStudent.getIndex()).build();
+        return DataAccess.postStudent(student);
     }
 
     @POST

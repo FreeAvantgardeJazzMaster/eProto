@@ -4,6 +4,7 @@ import DataModel.Grade;
 import DataModel.Student;
 import DataModel.StudentIndex;
 import Main.DatabaseInit;
+import Utils.JsonError;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -25,11 +26,15 @@ public class StudentAdapter {
 
     public static List<Grade> getStudentByIndexGrades(int index){
         Query<Student> query = datastore.find(Student.class).field("index").equal(index);
+        if (query.get() == null)
+            throw new Utils.NotFoundException(new JsonError("Error", "Student " + String.valueOf(index) + " not found"));
         return query.get().getGrades();
     }
 
     public static Grade getStudentByIndexGradesById(int index, int id){
         Query<Student> query = datastore.find(Student.class).field("index").equal(index);
+        if (query.get() == null)
+            throw new Utils.NotFoundException(new JsonError("Error", "Student " + String.valueOf(index) + " not found"));
         List<Grade> grades = query.get().getGrades();
         for(Grade grade : grades){
             if (grade.getId() == id)
