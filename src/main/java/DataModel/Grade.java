@@ -2,6 +2,8 @@ package DataModel;
 
 import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLinks;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Reference;
 
 import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
@@ -13,10 +15,12 @@ import java.util.Date;
 import java.util.List;
 
 @XmlRootElement
+@Embedded
 public class Grade {
     private int id;
     private float value;
     private Date date;
+    @Reference
     private Course course;
     @XmlTransient
     private int studentIndex;

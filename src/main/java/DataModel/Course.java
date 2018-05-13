@@ -3,6 +3,7 @@ package DataModel;
 import org.bson.types.ObjectId;
 import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLinks;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -20,6 +21,7 @@ public class Course {
 
     @Id
     @XmlTransient
+    @XmlJavaTypeAdapter(ObjectIdJaxbAdapter.class)
     private ObjectId objectId;
 
     private int id;
@@ -62,7 +64,7 @@ public class Course {
     public ObjectId getObjectId() {
         return objectId;
     }
-    @XmlTransient
+
     public void setObjectId(ObjectId objectId) {
         this.objectId = objectId;
     }

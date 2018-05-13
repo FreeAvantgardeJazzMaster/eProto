@@ -87,8 +87,7 @@ public class Service {
     @POST
     @Path("/students/{index}/grades")
     public Response postGrade(@PathParam("index") int index, Grade grade){
-        DataAccess.postGrade(index, grade);
-        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + index + "/grades").build();
+        return DataAccess.postGrade(index, grade);
     }
 
 
