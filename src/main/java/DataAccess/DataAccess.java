@@ -202,14 +202,14 @@ public class DataAccess {
 
     public static Response putStudent(int index, Student newStudent){
         Student student = StudentAdapter.getStudentByIndex(index);
-            if (student != null) {
-                List<Grade> grades = newStudent.getGrades();
-                for (Grade grade : grades){
-                    Course course = CourseAdapter.getCourseById(grade.getCourse().getId());
-                    if (course == null)
-                        return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ grade.getCourse().getId() +" not found").build();
-                    grade.setCourse(course);
-                }
+        List<Grade> grades = newStudent.getGrades();
+        for (Grade grade : grades){
+            Course course = CourseAdapter.getCourseById(grade.getCourse().getId());
+            if (course == null)
+                return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ grade.getCourse().getId() +" not found").build();
+            grade.setCourse(course);
+        }
+        if (student != null) {
                 student.setGrades(newStudent.getGrades());
                 student.setBirthDate(newStudent.getBirthDate());
                 student.setFirstName(newStudent.getFirstName());

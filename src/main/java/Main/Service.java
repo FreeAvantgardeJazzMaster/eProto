@@ -6,11 +6,15 @@ import DataModel.Grade;
 import DataModel.Student;
 import Utils.JsonError;
 import Utils.NotFoundException;
+import jersey.repackaged.com.google.common.collect.Lists;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Path("/")
@@ -19,8 +23,43 @@ public class Service {
     @GET
     @Path("/students")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Student> getStudents(){
-            return DataAccess.getStudents();
+    public Response getStudents(@QueryParam("firstName") String firstName,
+                                     @QueryParam("lastName") String lastName,
+                                     @QueryParam("date") Date date,
+                                     @QueryParam("dateRelation") String dateRelation){
+        List<Student> students = DataAccess.getStudents();
+
+        if (students == null || students.size() == 0)
+            return Response.status(Response.Status.NOT_FOUND).entity("No students").build();
+
+        if (firstName != null) {
+            students = students.stream().filter(st -> st.getFirstName().equals(firstName)).collect(Collectors.toList());
+        }
+
+        if (lastName != null) {
+            students = students.stream().filter(st -> st.getLastName().equals(lastName)).collect(Collectors.toList());
+        }
+
+        if (date != null && dateRelation != null) {
+            switch (dateRelation.toLowerCase()) {
+                case "equal":
+                    students = students.stream().filter(st -> st.getBirthDate().equals(date)).collect(Collectors.toList());
+                    break;
+                case "after":
+                    students = students.stream().filter(st -> st.getBirthDate().after(date)).collect(Collectors.toList());
+                    break;
+                case "before":
+                    students = students.stream().filter(st -> st.getBirthDate().before(date)).collect(Collectors.toList());
+                    break;
+            }
+        }
+
+        GenericEntity<List<Student>> entity = new GenericEntity<List<Student>>(Lists.newArrayList(students)) {};
+
+        if (students == null || students.size() == 0)
+            return Response.status(Response.Status.NOT_FOUND).entity("No matching results").build();
+
+        return Response.status(Response.Status.OK).entity(entity).build();
     }
 
     @GET
@@ -37,8 +76,39 @@ public class Service {
     @GET
     @Path("/students/{index}/grades")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Grade> getStudentGrades(@PathParam("index") int index){
-        return DataAccess.getStudentByIndexGrades(index);
+    public Response getStudentGrades(@PathParam("index") int index,
+                                     @QueryParam("course") String course,
+                                     @QueryParam("value") String value,
+                                     @QueryParam("valueRelation") String valueRelation){
+        List<Grade> grades = DataAccess.getStudentByIndexGrades(index);
+
+        if (grades == null || grades.size() == 0)
+            return Response.status(Response.Status.NOT_FOUND).entity("No grades").build();
+
+        if (course != null){
+            grades = grades.stream().filter(grade -> grade.getCourse().getName().equals(course)).collect(Collectors.toList());
+        }
+
+        if (value != null && valueRelation != null) {
+            switch (valueRelation.toLowerCase()) {
+                case "equal":
+                    grades = grades.stream().filter(grade -> grade.getValue() == Float.valueOf(value).floatValue()).collect(Collectors.toList());
+                    break;
+                case "grater":
+                    grades = grades.stream().filter(grade -> grade.getValue() > Float.valueOf(value).floatValue()).collect(Collectors.toList());
+                    break;
+                case "lower":
+                    grades = grades.stream().filter(grade -> grade.getValue() < Float.valueOf(value).floatValue()).collect(Collectors.toList());
+                    break;
+            }
+        }
+
+        if (grades == null || grades.size() == 0)
+            return Response.status(Response.Status.NOT_FOUND).entity("No matching grades").build();
+
+        GenericEntity<List<Grade>> entity = new GenericEntity<List<Grade>>(Lists.newArrayList(grades)) {};
+
+        return Response.status(Response.Status.OK).entity(entity).build();
     }
 
     @GET
@@ -55,8 +125,21 @@ public class Service {
     @GET
     @Path("/courses")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Course> getCourses(){
-        return DataAccess.getCourses();
+    public Response getCourses(@QueryParam("lecturer") String lecturer){
+        List<Course> courses = DataAccess.getCourses();
+
+        if (courses == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("No courses").build();
+        if (lecturer != null){
+            courses = courses.stream().filter(course -> course.getLecturer().equals(lecturer)).collect(Collectors.toList());
+        }
+        if (courses == null || courses.size() == 0){
+            return Response.status(Response.Status.NOT_FOUND).entity("No matching courses").build();
+        }
+
+        GenericEntity<List<Course>> entity = new GenericEntity<List<Course>>(Lists.newArrayList(courses)) {};
+
+        return Response.status(Response.Status.OK).entity(entity).build();
     }
 
     @GET

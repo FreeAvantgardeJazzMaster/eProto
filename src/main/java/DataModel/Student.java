@@ -1,5 +1,6 @@
 package DataModel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.bson.types.ObjectId;
 import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLinks;
@@ -32,7 +33,7 @@ public class Student {
 
     @Id
     @XmlTransient
-    @XmlJavaTypeAdapter(ObjectIdJaxbAdapter.class)
+    //@XmlJavaTypeAdapter(ObjectIdJaxbAdapter.class)
     private ObjectId ID;
 
     @Indexed(name = "index", unique = true)
@@ -40,6 +41,7 @@ public class Student {
 
     private String firstName;
     private String lastName;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern= "yyyy - MM - dd" , timezone= "CET")
     private Date birthDate;
     private List<Grade> grades = new ArrayList<>();
     public Student() {

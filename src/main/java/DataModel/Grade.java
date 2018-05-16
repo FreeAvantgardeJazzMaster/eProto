@@ -1,5 +1,6 @@
 package DataModel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLinks;
 import org.mongodb.morphia.annotations.Embedded;
@@ -19,6 +20,7 @@ import java.util.List;
 public class Grade {
     private int id;
     private float value;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern= "yyyy - MM - dd" , timezone= "CET")
     private Date date;
     @Reference
     private Course course;
