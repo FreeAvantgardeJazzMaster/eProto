@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DataAccess {
     private static List<Student> students = new ArrayList<>();
@@ -300,7 +301,7 @@ public class DataAccess {
         student.setGrades(grades);
 
         StudentAdapter.updateStudent(student);
-        return Response.status(Response.Status.CREATED).header("Location", "/students/" + index + "/grades").build();
+        return Response.status(Response.Status.CREATED).header("Location", "/students/" + index + "/grades/" + grade.getId()).build();
     }
 
     public static Response putGrade(int index, int id, Grade newGrade){
@@ -337,12 +338,16 @@ public class DataAccess {
 
     public static Response deleteGrade(int index, int id){
         Student student = getStudentByIndex(index);
+
+        //student.setGrades(student.getGrades().stream().filter(grade -> grade.getId() != id).collect(Collectors.toList()));
         if (student != null){
-            if(student.getGrades().remove(getStudentByIndexGradeById(index, id))) {
-                StudentAdapter.updateStudent(student);
-                return Response.status(Response.Status.OK).build();
+            for (Grade grade : student.getGrades()){
+                if (grade.getId() == id){
+                    student.getGrades().remove(grade);
+                    StudentAdapter.updateStudent(student);
+                    return Response.status(Response.Status.OK).build();
+                }
             }
-            else
                 return Response.status(Response.Status.NO_CONTENT).build();
         }
         return Response.status(Response.Status.NO_CONTENT).build();

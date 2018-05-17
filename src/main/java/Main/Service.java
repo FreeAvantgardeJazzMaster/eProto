@@ -26,7 +26,7 @@ public class Service {
     public Response getStudents(@QueryParam("firstName") String firstName,
                                      @QueryParam("lastName") String lastName,
                                      @QueryParam("date") Date date,
-                                     @QueryParam("dateRelation") String dateRelation){
+                                     @QueryParam("rel") String rel){
         List<Student> students = DataAccess.getStudents();
 
         if (students == null || students.size() == 0)
@@ -40,8 +40,8 @@ public class Service {
             students = students.stream().filter(st -> st.getLastName().equals(lastName)).collect(Collectors.toList());
         }
 
-        if (date != null && dateRelation != null) {
-            switch (dateRelation.toLowerCase()) {
+        if (date != null && rel != null) {
+            switch (rel.toLowerCase()) {
                 case "equal":
                     students = students.stream().filter(st -> st.getBirthDate().equals(date)).collect(Collectors.toList());
                     break;
@@ -79,7 +79,7 @@ public class Service {
     public Response getStudentGrades(@PathParam("index") int index,
                                      @QueryParam("course") String course,
                                      @QueryParam("value") String value,
-                                     @QueryParam("valueRelation") String valueRelation){
+                                     @QueryParam("rel") String rel){
         List<Grade> grades = DataAccess.getStudentByIndexGrades(index);
 
         if (grades == null || grades.size() == 0)
@@ -89,8 +89,8 @@ public class Service {
             grades = grades.stream().filter(grade -> grade.getCourse().getName().equals(course)).collect(Collectors.toList());
         }
 
-        if (value != null && valueRelation != null) {
-            switch (valueRelation.toLowerCase()) {
+        if (value != null && rel != null) {
+            switch (rel.toLowerCase()) {
                 case "equal":
                     grades = grades.stream().filter(grade -> grade.getValue() == Float.valueOf(value).floatValue()).collect(Collectors.toList());
                     break;

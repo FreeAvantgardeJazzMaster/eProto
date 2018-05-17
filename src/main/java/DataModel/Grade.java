@@ -20,7 +20,7 @@ import java.util.List;
 public class Grade {
     private int id;
     private float value;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern= "yyyy - MM - dd" , timezone= "CET")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd" , timezone= "CET")
     private Date date;
     @Reference
     private Course course;

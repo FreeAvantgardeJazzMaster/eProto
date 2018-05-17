@@ -41,7 +41,7 @@ public class Student {
 
     private String firstName;
     private String lastName;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern= "yyyy - MM - dd" , timezone= "CET")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd" , timezone= "CET")
     private Date birthDate;
     private List<Grade> grades = new ArrayList<>();
     public Student() {
