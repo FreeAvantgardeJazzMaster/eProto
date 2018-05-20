@@ -49,4 +49,12 @@ public class CourseAdapter {
         }
     }
 
+    public static List<Course> getCoursesByLecturer(String lecturer) {
+        final Query<Course> query = datastore.createQuery(Course.class);
+        if (lecturer != null)
+            query.field("lecturer").containsIgnoreCase(lecturer);
+        List<Course> courses = query.asList();
+        return courses;
+    }
+
 }

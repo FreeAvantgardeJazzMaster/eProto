@@ -27,32 +27,7 @@ public class Service {
                                      @QueryParam("lastName") String lastName,
                                      @QueryParam("date") Date date,
                                      @QueryParam("rel") String rel){
-        List<Student> students = DataAccess.getStudents();
-
-        if (students == null || students.size() == 0)
-            return Response.status(Response.Status.NOT_FOUND).entity("No students").build();
-
-        if (firstName != null) {
-            students = students.stream().filter(st -> st.getFirstName().equals(firstName)).collect(Collectors.toList());
-        }
-
-        if (lastName != null) {
-            students = students.stream().filter(st -> st.getLastName().equals(lastName)).collect(Collectors.toList());
-        }
-
-        if (date != null && rel != null) {
-            switch (rel.toLowerCase()) {
-                case "equal":
-                    students = students.stream().filter(st -> st.getBirthDate().equals(date)).collect(Collectors.toList());
-                    break;
-                case "after":
-                    students = students.stream().filter(st -> st.getBirthDate().after(date)).collect(Collectors.toList());
-                    break;
-                case "before":
-                    students = students.stream().filter(st -> st.getBirthDate().before(date)).collect(Collectors.toList());
-                    break;
-            }
-        }
+        List<Student> students = DataAccess.getStudentsByFilters(firstName, lastName, date, rel);
 
         GenericEntity<List<Student>> entity = new GenericEntity<List<Student>>(Lists.newArrayList(students)) {};
 
@@ -126,13 +101,9 @@ public class Service {
     @Path("/courses")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response getCourses(@QueryParam("lecturer") String lecturer){
-        List<Course> courses = DataAccess.getCourses();
 
-        if (courses == null)
-            return Response.status(Response.Status.NOT_FOUND).entity("No courses").build();
-        if (lecturer != null){
-            courses = courses.stream().filter(course -> course.getLecturer().equals(lecturer)).collect(Collectors.toList());
-        }
+        List<Course> courses = DataAccess.getCoursesByLecturer(lecturer);
+
         if (courses == null || courses.size() == 0){
             return Response.status(Response.Status.NOT_FOUND).entity("No matching courses").build();
         }

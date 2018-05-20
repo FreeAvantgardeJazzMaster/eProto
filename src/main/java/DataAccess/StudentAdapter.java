@@ -9,6 +9,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
+import java.util.Date;
 import java.util.List;
 
 public class StudentAdapter {
@@ -66,5 +67,23 @@ public class StudentAdapter {
         else{
             return false;
         }
+    }
+
+    public static List<Student> getStudentsByFilters(String firstName, String lastName, Date birthDate, String dateRelation) {
+        final Query<Student> query = datastore.createQuery(Student.class);
+        if(firstName != null)
+            query.field("firstName").containsIgnoreCase(firstName);
+        if(lastName != null)
+            query.field("lastName").containsIgnoreCase(lastName);
+        if(birthDate != null && dateRelation != null) {
+            if(dateRelation.equals("equal"))
+                query.field("birthDate").equal(birthDate);
+            else if(dateRelation.equals("grater"))
+                query.field("birthDate").greaterThan(birthDate);
+            else if(dateRelation.equals("lower"))
+                query.field("birthDate").lessThan(birthDate);
+        }
+        List<Student> filteredStudents = query.asList();
+        return filteredStudents;
     }
 }

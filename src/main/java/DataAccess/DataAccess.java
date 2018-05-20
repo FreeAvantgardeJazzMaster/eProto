@@ -171,6 +171,10 @@ public class DataAccess {
         return StudentAdapter.getStudents();
     }
 
+    public static List<Student> getStudentsByFilters(String firstName, String lastName, Date birthDate, String dateRelation){
+        return StudentAdapter.getStudentsByFilters(firstName, lastName, birthDate, dateRelation);
+    }
+
     public static Student getStudentByIndex(int index){
         return StudentAdapter.getStudentByIndex(index);
     }
@@ -234,6 +238,10 @@ public class DataAccess {
 
     public static List<Course> getCourses(){
         return CourseAdapter.getCourses();
+    }
+
+    public static List<Course> getCoursesByLecturer(String lecturer){
+        return CourseAdapter.getCoursesByLecturer(lecturer);
     }
 
     public static Course getCourseById(int id){
