@@ -8,7 +8,7 @@ import org.mongodb.morphia.query.UpdateOperations;
 
 import java.util.List;
 
-public class CourseAdapter {
+public class CourseDataAccess {
     private static Datastore datastore = DatabaseInit.getDatastore();
 
     public static List<Course> getCourses(){

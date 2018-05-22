@@ -12,7 +12,7 @@ import org.mongodb.morphia.query.UpdateOperations;
 import java.util.Date;
 import java.util.List;
 
-public class StudentAdapter {
+public class StudentDataAccess {
     private static Datastore datastore = DatabaseInit.getDatastore();
 
     public static List<Student> getStudents(){

@@ -1,5 +1,7 @@
-package DataAccess;
+package DataService;
 
+import DataAccess.CourseDataAccess;
+import DataAccess.StudentDataAccess;
 import DataModel.*;
 import Main.DatabaseInit;
 import org.mongodb.morphia.Datastore;
@@ -10,9 +12,8 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class DataAccess {
+public class DataService {
     private static List<Student> students = new ArrayList<>();
     private static List<Course> courses = new ArrayList<>();
     private static List<Grade> grades = new ArrayList<>();
@@ -104,7 +105,7 @@ public class DataAccess {
         while(isFound) {
             isFound = false;
             index = getStudentIndex();
-            if (StudentAdapter.getStudentByIndex(index) != null)
+            if (StudentDataAccess.getStudentByIndex(index) != null)
                 isFound = true;
         }
         return index;
@@ -114,7 +115,7 @@ public class DataAccess {
         boolean isFound = true;
         while(isFound) {
             isFound = false;
-            if (StudentAdapter.getStudentByIndex(index) != null) {
+            if (StudentDataAccess.getStudentByIndex(index) != null) {
                 isFound = true;
                 index++;
             }
@@ -128,7 +129,7 @@ public class DataAccess {
         while(isFound) {
             isFound = false;
             id = getCourseId();
-            if (CourseAdapter.getCourseById(id) != null)
+            if (CourseDataAccess.getCourseById(id) != null)
                 isFound = true;
         }
         return id;
@@ -168,23 +169,23 @@ public class DataAccess {
 
 
     public static List<Student> getStudents(){
-        return StudentAdapter.getStudents();
+        return StudentDataAccess.getStudents();
     }
 
     public static List<Student> getStudentsByFilters(String firstName, String lastName, Date birthDate, String dateRelation){
-        return StudentAdapter.getStudentsByFilters(firstName, lastName, birthDate, dateRelation);
+        return StudentDataAccess.getStudentsByFilters(firstName, lastName, birthDate, dateRelation);
     }
 
     public static Student getStudentByIndex(int index){
-        return StudentAdapter.getStudentByIndex(index);
+        return StudentDataAccess.getStudentByIndex(index);
     }
 
     public static List<Grade> getStudentByIndexGrades(int index){
-        return StudentAdapter.getStudentByIndexGrades(index);
+        return StudentDataAccess.getStudentByIndexGrades(index);
     }
 
     public static Grade getStudentByIndexGradeById(int index, int id){
-        return StudentAdapter.getStudentByIndexGradesById(index, id);
+        return StudentDataAccess.getStudentByIndexGradesById(index, id);
     }
 
     public static Response postStudent(Student student){
@@ -194,22 +195,22 @@ public class DataAccess {
             for (Grade grade : grades){
                 grade.setId(getFirstAvailableGradeId());
                 grade.setStudentIndex(student.getIndex());
-                Course gradesCourse = CourseAdapter.getCourseById(grade.getCourse().getId());
+                Course gradesCourse = CourseDataAccess.getCourseById(grade.getCourse().getId());
                 if (gradesCourse == null)
                     return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ grade.getCourse().getId() +" not found").build();
                 grade.setCourse(gradesCourse);
             }
         }
-        StudentAdapter.addStudent(student);
+        StudentDataAccess.addStudent(student);
 
         return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + student.getIndex()).build();
     }
 
     public static Response putStudent(int index, Student newStudent){
-        Student student = StudentAdapter.getStudentByIndex(index);
+        Student student = StudentDataAccess.getStudentByIndex(index);
         List<Grade> grades = newStudent.getGrades();
         for (Grade grade : grades){
-            Course course = CourseAdapter.getCourseById(grade.getCourse().getId());
+            Course course = CourseDataAccess.getCourseById(grade.getCourse().getId());
             if (course == null)
                 return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ grade.getCourse().getId() +" not found").build();
             grade.setCourse(course);
@@ -219,17 +220,17 @@ public class DataAccess {
                 student.setBirthDate(newStudent.getBirthDate());
                 student.setFirstName(newStudent.getFirstName());
                 student.setLastName(newStudent.getLastName());
-                StudentAdapter.updateStudent(student);
+                StudentDataAccess.updateStudent(student);
 
                 return Response.status(Response.Status.OK).build();
             }
         newStudent.setIndex(index);
-        StudentAdapter.addStudent(newStudent);
+        StudentDataAccess.addStudent(newStudent);
         return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + newStudent.getIndex()).build();
     }
 
     public static Response deleteStudent(int index){
-        if(StudentAdapter.deleteStudent(index))
+        if(StudentDataAccess.deleteStudent(index))
             return Response.status(Response.Status.OK).build();
         else
             return Response.status(Response.Status.NO_CONTENT).build();
@@ -237,44 +238,44 @@ public class DataAccess {
 
 
     public static List<Course> getCourses(){
-        return CourseAdapter.getCourses();
+        return CourseDataAccess.getCourses();
     }
 
     public static List<Course> getCoursesByLecturer(String lecturer){
-        return CourseAdapter.getCoursesByLecturer(lecturer);
+        return CourseDataAccess.getCoursesByLecturer(lecturer);
     }
 
     public static Course getCourseById(int id){
-        return CourseAdapter.getCourseById(id);
+        return CourseDataAccess.getCourseById(id);
     }
 
     private static Course getCourseByName(String name){
-        return CourseAdapter.getCourseByName(name);
+        return CourseDataAccess.getCourseByName(name);
     }
 
     public static Course postCourse(Course course){
-        course.setId(DataAccess.getFirstAvailableCourseId());
-        CourseAdapter.addCourse(course);
+        course.setId(DataService.getFirstAvailableCourseId());
+        CourseDataAccess.addCourse(course);
         return course;
     }
 
     public static Response putCourse(int id, Course newCourse){
-        Course course = CourseAdapter.getCourseById(id);
+        Course course = CourseDataAccess.getCourseById(id);
         if (course != null) {
             course.setName(newCourse.getName());
             course.setLecturer(newCourse.getLecturer());
-            CourseAdapter.updateCourse(course);
+            CourseDataAccess.updateCourse(course);
             return Response.status(Response.Status.OK).build();
         }
 
         newCourse.setId(id);
-        CourseAdapter.addCourse(newCourse);
+        CourseDataAccess.addCourse(newCourse);
         return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/courses/" + newCourse.getId()).build();
     }
 
     public static Response deleteCourse(int id){
         List<Student> students = getStudents();
-        if(CourseAdapter.deleteCourse(id)) {
+        if(CourseDataAccess.deleteCourse(id)) {
             for (Student student : students){
                 List<Grade> grades = student.getGrades();
                 List<Grade> copyOfGrades = new ArrayList<>(grades);
@@ -284,7 +285,7 @@ public class DataAccess {
                     }
                 }
                 student.setGrades(copyOfGrades);
-                StudentAdapter.updateStudent(student);
+                StudentDataAccess.updateStudent(student);
             }
             return Response.status(Response.Status.OK).build();
         }
@@ -298,8 +299,8 @@ public class DataAccess {
         Student student = getStudentByIndex(index);
         if (student == null)
             return Response.status(Response.Status.NOT_FOUND).entity("Student not found").build();
-        List<Grade> grades = StudentAdapter.getStudentByIndexGrades(index);
-        Course course = CourseAdapter.getCourseById(grade.getCourse().getId());
+        List<Grade> grades = StudentDataAccess.getStudentByIndexGrades(index);
+        Course course = CourseDataAccess.getCourseById(grade.getCourse().getId());
         if (course == null)
             return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ grade.getCourse().getId() +" not found").build();
         grade.setId(getGradeId());
@@ -308,37 +309,37 @@ public class DataAccess {
         grades.add(grade);
         student.setGrades(grades);
 
-        StudentAdapter.updateStudent(student);
+        StudentDataAccess.updateStudent(student);
         return Response.status(Response.Status.CREATED).header("Location", "/students/" + index + "/grades/" + grade.getId()).build();
     }
 
     public static Response putGrade(int index, int id, Grade newGrade){
-        Student student = StudentAdapter.getStudentByIndex(index);
+        Student student = StudentDataAccess.getStudentByIndex(index);
         if (student != null){
             if(student.getGrades() != null) {
                 for (Grade grade : student.getGrades()) {
                     if (grade.getId() == id) {
                         grade.setValue(newGrade.getValue());
-                        Course course = CourseAdapter.getCourseById(newGrade.getCourse().getId());
+                        Course course = CourseDataAccess.getCourseById(newGrade.getCourse().getId());
                         if (course == null)
                             return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ newGrade.getCourse().getId() +" not found").build();
                         grade.setCourse(course);
                         grade.setDate(newGrade.getDate());
-                        StudentAdapter.updateStudent(student);
+                        StudentDataAccess.updateStudent(student);
                         return Response.status(Response.Status.OK).build();
                     }
                 }
             }
-            List<Grade> grades = StudentAdapter.getStudentByIndexGrades(index);
+            List<Grade> grades = StudentDataAccess.getStudentByIndexGrades(index);
             newGrade.setId(getGradeId());
             newGrade.setStudentIndex(index);
-            Course course = CourseAdapter.getCourseById(newGrade.getCourse().getId());
+            Course course = CourseDataAccess.getCourseById(newGrade.getCourse().getId());
             if (course == null)
                 return Response.status(Response.Status.NOT_FOUND).entity("Grade's course with id = "+ newGrade.getCourse().getId() +" not found").build();
             newGrade.setCourse(course);
             grades.add(newGrade);
             student.setGrades(grades);
-            StudentAdapter.updateStudent(student);
+            StudentDataAccess.updateStudent(student);
             return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + index + "/grades/" + newGrade.getId()).build();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
@@ -352,7 +353,7 @@ public class DataAccess {
             for (Grade grade : student.getGrades()){
                 if (grade.getId() == id){
                     student.getGrades().remove(grade);
-                    StudentAdapter.updateStudent(student);
+                    StudentDataAccess.updateStudent(student);
                     return Response.status(Response.Status.OK).build();
                 }
             }

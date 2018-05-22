@@ -15,7 +15,7 @@ public class Main {
     public static final String BASE_URI = "http://localhost:8080/";
 
     public static HttpServer startServer() {
-        final ResourceConfig rc = new ResourceConfig().packages("Main").register(DeclarativeLinkingFeature.class).packages("org.glassfish.jersey.examples.linking").register(RestError.class);
+        final ResourceConfig rc = new ResourceConfig().packages("Endpoints").register(DeclarativeLinkingFeature.class).packages("org.glassfish.jersey.examples.linking").register(RestError.class);
         rc.register(DateParamConverterProvider.class);
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
