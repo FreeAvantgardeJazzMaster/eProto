@@ -1,6 +1,148 @@
 article:target{
-    display: block
+    display: block;
+    margin-left: 10px;
 }
+
 article{
-    display: none
+    display: none;
+    white-space: nowrap;
 }
+
+h2{
+    margin-top: 0px;
+    padding-top: 10px;
+    color: #3D3D3D;
+    font-family: "Arial";
+    font-weight: 100;
+}
+
+header{
+    background: #37629c;
+}
+
+h1{
+    color: white;
+    font-family: "Arial";
+    font-weight: 100;
+}
+
+header figure, header h1{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+nav{
+    background: #368CB3;
+    flex-grow: 1;
+    min-width: 175px;
+}
+
+li{
+    padding: 10px;
+}
+
+li:hover{
+    background: #2882a3
+}
+
+li a{
+    color: white;
+    text-decoration: none;
+    font-family: "Arial";
+    white-space: nowrap;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+ul {
+    margin :0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+footer{
+    background: linear-gradient(silver, white);
+}
+
+.footer{
+    margin-left: 10px
+}
+
+.content{
+    background: #fcfcfc;
+    padding-bottom: 10px;
+    flex-grow: 10000000;
+    min-width: 1096px;
+}
+
+.container{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+body{
+    min-width: 1096px;
+}
+
+table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 4px;
+}
+
+table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+table tr:nth-child(odd){
+    background-color: #e0e0e0;
+}
+
+table tr:hover {
+    background-color: #d2e0f2;
+}
+
+table th {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: left;
+    background-color: #3F70B2;
+    color: white;
+}
+
+input, select {
+    width: 100%;
+    padding: 5px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #3594b7;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2882a3;
+}
+
+th input{
+    background-color: #3F70B2;
+    color: white;
+    border: none;
+}
+

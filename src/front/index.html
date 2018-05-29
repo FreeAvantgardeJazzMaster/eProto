@@ -12,203 +12,208 @@
             </figure>
             <h1>Student Grades Manager</h1>
         </header>
-        <div>
+        <div class="container">
             <nav>
                 <ul>
                     <li><a href="#students">Student list</a></li>
                     <li><a href="#courses">Course list</a></li>
                 </ul>
             </nav>
+            <div class="content">
+                <article id="students">
+                    <h2>Student list</h2>
+                    <form>
+                        <table id="students">
+                            <tr>
+                                <th>Lp.</th>
+                                <th><input type="text" name="index" value="Index" readonly/></th>
+                                <th><input type="text" name="name" value="Name" readonly/></th>
+                                <th><input type="text" name="lastName" value="Last name" readonly/></th>
+                                <th><input type="text" name="bithDate" value="Birth date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly/></th>
+                                <th><input type="text" name="action" value="Action" readonly/></th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><input type="number" name="index" value="122374" readonly/></td>
+                                <td><input type="text" name="name" value="Adam"/></td>
+                                <td><input type="text" name="lastName" value="Kokosza"/></td>
+                                <td><input type="text" name="bithDate" value="1995-08-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td>
+                                    <button onclick="window.location.href='#grades'"> Grades</button>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><input type="number" name="index" value="122363" readonly/></td>
+                                <td><input type="text" name="name" value="Karol"/></td>
+                                <td><input type="text" name="lastName" value="Karolek"/></td>
+                                <td><input type="text" name="bithDate" value="1993-04-23" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td>
+                                    <button onclick="window.location.href='#grades'"> Grades</button>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><input type="number" name="index" value="122997" readonly/></td>
+                                <td><input type="text" name="name" value="Kamil"/></td>
+                                <td><input type="text" name="lastName" value="Szmajdziński"/></td>
+                                <td><input type="text" name="bithDate" value="1995-02-01" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td>
+                                    <button onclick="window.location.href='#grades'"> Grades</button>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><input type="number" name="index" placeholder="Index" required></td>
+                                <td><input type="text" name="firstName" placeholder="First name" required></td>
+                                <td><input type="text" name="lastName" placeholder="Last name" required></td>
+                                <td><input type="text" name="birthday" placeholder="Birthday" onfocus="(this.type='date')"
+                                           onblur="(this.type='text')" required></td>
+                                <td>
+                                    <button type="submit">Add</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </article>
+                <article id="courses">
+                    <h2>Course list</h2>
+                    <form>
+                        <table id="courses">
+                            <tr>
+                                <th>Lp.</th>          
+                                <th><input type="text" name="name" value="Name"/></th>
+                                <th><input type="text" name="lecturer" value="Lecturer"/></th>
+                                <th><input type="text" name="action" value="Action" readonly></th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><input type="text" name="name" value="IT"/></td>
+                                <td><input type="text" name="lecturer" value="Tomasz Jedwabny"/></td>
+                                <td>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><input type="text" name="name" value="Integracja"/></td>
+                                <td><input type="text" name="lecturer" value="Patryk Kuśmierkiewicz"/></td>
+                                <td>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><input type="text" name="name" value="WF"/></td>
+                                <td><input type="text" name="lecturer" value="Robert Brylewski"/></td>
+                                <td>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><input type="text" name="name" placeholder="Name" required/></td>
+                                <td><input type="text" name="lecturer" placeholder="Lecturer" required/></td>
+                                <td>
+                                    <button type="submit">Add</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </article>
+                <article id="grades">
+                    <h2>Student's grades</h2>
+                    <form>
+                        <table id="grades">
+                            <tr>
+                                <th>Lp.</th>
+                                <th><input type="text" name="course" value="Course" readonly/></th>
+                                <th><input type="text" name="value" value="Value" readonly/></th>
+                                <th><input type="text" name="date" value="Date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly/></th>
+                                <th><input type="text" name="action" value="Action" readonly></th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <select>
+                                        <option selected="selected">IT</option>
+                                        <option>Integracja</option>
+                                        <option>WF</option>
+                                    </select>
+                                </td>
+                                <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
+                                <td><input type="text" name="date" value="2018-10-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <select>
+                                        <option selected="selected">IT</option>
+                                        <option>Integracja</option>
+                                        <option>WF</option>
+                                    </select>
+                                </td>
+                                <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
+                                <td><input type="text" name="date" value="2018-03-23" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <select>
+                                        <option selected="selected">IT</option>
+                                        <option>Integracja</option>
+                                        <option>WF</option>
+                                    </select>
+                                </td>
+                                <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
+                                <td><input type="text" name="date" value="2018-03-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td>
+                                    <button type="button">Modify</button>
+                                    <button type="button">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>
+                                    <select>
+                                        <option selected="selected">IT</option>
+                                        <option>Integracja</option>
+                                        <option>WF</option>
+                                    </select>
+                                </td>
+                                <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
+                                <td><input type="text" name="date" placeholder="Date" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td>
+                                    <button type="submit">Add</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </article>
+            </div>
         </div>
-        <article id="students">
-            <h2>Student list</h2>
-            <form>
-                <table>
-                    <tr>
-                        <th>Lp.</th>
-                        <th><input type="number" name="index" placeholder="Index"/></th>
-                        <th><input type="text" name="name" placeholder="Name"/></th>
-                        <th><input type="text" name="lestName" placeHolder="Last name"/></th>
-                        <th><input type="text" name="bithDate" placeHolder="Birth date" onfocus="(this.type='date')" onblur="(this.type='text')"/></th>
-                        <th><input type="text" name="action" value="Action" readonly></th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="number" name="index" value="122374" readonly/></td>
-                        <td><input type="text" name="name" value="Adam"/></td>
-                        <td><input type="text" name="lastName" value="Kokosza"/></td>
-                        <td><input type="text" name="bithDate" value="1995-08-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                        <td>
-                            <button onclick="window.location.href='#grades'"> Grades</button>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><input type="number" name="index" value="122363" readonly/></td>
-                        <td><input type="text" name="name" value="Karol"/></td>
-                        <td><input type="text" name="lastName" value="Karolek"/></td>
-                        <td><input type="text" name="bithDate" value="1993-04-23" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                        <td>
-                            <button onclick="window.location.href='#grades'"> Grades</button>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><input type="number" name="index" value="122997" readonly/></td>
-                        <td><input type="text" name="name" value="Kamil"/></td>
-                        <td><input type="text" name="lastName" value="Szmajdziński"/></td>
-                        <td><input type="text" name="bithDate" value="1995-02-01" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                        <td>
-                            <button onclick="window.location.href='#grades'"> Grades</button>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><input type="number" name="index" placeholder="Index" required></td>
-                        <td><input type="text" name="firstName" placeholder="First name" required></td>
-                        <td><input type="text" name="lastName" placeholder="Last name" required></td>
-                        <td><input type="text" name="birthday" placeholder="Birthday" onfocus="(this.type='date')"
-                                   onblur="(this.type='text')" required></td>
-                        <td>
-                            <button type="submit">Add</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </article>
-        <article id="courses">
-            <h2>Course list</h2>
-            <form>
-                <table>
-                    <tr>
-                        <th>Lp.</th>          
-                        <th><input type="text" name="name" placeholder="Name"/></th>
-                        <th><input type="text" name="lecturer" placeHolder="Lecturer"/></th>
-                        <th><input type="text" name="action" value="Action" readonly></th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="text" name="name" value="IT"/></td>
-                        <td><input type="text" name="lecturer" value="Tomasz Jedwabny"/></td>
-                        <td>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><input type="text" name="name" value="Integracja"/></td>
-                        <td><input type="text" name="lecturer" value="Patryk Kuśmierkiewicz"/></td>
-                        <td>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><input type="text" name="name" value="WF"/></td>
-                        <td><input type="text" name="lecturer" value="Robert Brylewski"/></td>
-                        <td>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><input type="text" name="name" placeholder="Name" required/></td>
-                        <td><input type="text" name="lecturer" placeholder="Lecturer" required/></td>
-                        <td>
-                            <button type="submit">Add</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </article>
-        <article id="grades">
-            <h2>Student's grades</h2>
-            <form>
-                <table>
-                    <tr>
-                        <th>Lp.</th>
-                        <th><input type="text" name="course" placeholder="Course"/></th>
-                        <th><input type="number" name="value" placeHolder="Value"/></th>
-                        <th><input type="text" name="date" placeHolder="Date" onfocus="(this.type='date')" onblur="(this.type='text')"/></th>
-                        <th><input type="text" name="action" value="Action" readonly></th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            <select>
-                                <option selected="selected">IT</option>
-                                <option>Integracja</option>
-                                <option>WF</option>
-                            </select>
-                        </td>
-                        <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
-                        <td><input type="text" name="date" value="2018-10-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                        <td>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <select>
-                                <option selected="selected">IT</option>
-                                <option>Integracja</option>
-                                <option>WF</option>
-                            </select>
-                        </td>
-                        <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
-                        <td><input type="text" name="date" value="2018-03-23" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                        <td>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>
-                            <select>
-                                <option selected="selected">IT</option>
-                                <option>Integracja</option>
-                                <option>WF</option>
-                            </select>
-                        </td>
-                        <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
-                        <td><input type="text" name="date" value="2018-03-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                        <td>
-                            <button type="button">Modify</button>
-                            <button type="button">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>
-                            <select>
-                                <option selected="selected">IT</option>
-                                <option>Integracja</option>
-                                <option>WF</option>
-                            </select>
-                        </td>
-                        <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
-                        <td><input type="text" name="date" placeholder="Date" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                        <td>
-                            <button type="submit">Add</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </article>
         <footer>
-            <small>&copy; Copyright 2018 Adam Kokosza<br/>Institute of Computing Science<br/>Poznan Univerity of Technology</small>
+            <div class="footer">
+                <small>&copy; Copyright 2018 Adam Kokosza<br/>Institute of Computing 
+                Science<br/>Poznan Univerity of Technology</small>
+            <div>
         </footer>
     </body>
 </html>

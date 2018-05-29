@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e70d2a64-6388-45e5-97b0-9b1747b3a82d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/front/index.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/front/style.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Endpoints/CoursesEndpoint.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/CourseAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/CourseDataAccess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/DataAccess.java" afterPath="$PROJECT_DIR$/src/main/java/DataService/DataService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/StudentAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/StudentDataAccess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Service.java" afterPath="$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java" />
+      <change beforePath="$PROJECT_DIR$/src/front/index.html" afterPath="$PROJECT_DIR$/src/front/index.html" />
+      <change beforePath="$PROJECT_DIR$/src/front/style.css" afterPath="$PROJECT_DIR$/src/front/style.css" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -61,7 +54,7 @@
       <file leaf-file-name="CoursesEndpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/CoursesEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
+            <state relative-caret-position="119">
               <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -77,7 +70,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/front/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-258">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -87,7 +80,7 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/front/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-1723">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -97,11 +90,9 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="238">
               <caret line="14" column="67" lean-forward="false" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,13 +100,9 @@
       <file leaf-file-name="DatabaseInit.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main/DatabaseInit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="323">
               <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#546#547#0" expanded="true" />
-                <element signature="e#578#579#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -230,8 +217,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -244,30 +229,13 @@
               <item name="eProto" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="eProto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eProto" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="front" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eProto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eProto" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eProto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eProto" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -429,7 +397,9 @@
       <workItem from="1526329003058" duration="470000" />
       <workItem from="1526463398789" duration="7151000" />
       <workItem from="1526493578379" duration="2363000" />
-      <workItem from="1526996623779" duration="102000" />
+      <workItem from="1526996623779" duration="819000" />
+      <workItem from="1527066771985" duration="265000" />
+      <workItem from="1527601718894" duration="49000" />
     </task>
     <task id="LOCAL-00001" summary="Dodanie sztucznej bazy i dodanie metod serwisu">
       <created>1523449287887</created>
@@ -494,11 +464,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526832298641</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Refactor. Add front">
+      <created>1526996833589</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1526996833589</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101337000" />
+    <option name="totallyTimeSpent" value="102368000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -583,7 +560,8 @@
     <MESSAGE value="Add DBRef fo courses in grades. Improve post grade method." />
     <MESSAGE value="Corrected deleting course process." />
     <MESSAGE value="Corrected params filtering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected params filtering" />
+    <MESSAGE value="Refactor. Add front" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor. Add front" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,30 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="11" lean-forward="true" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#getStudentIndex#0;class#DataService#0" expanded="false" />
-            <element signature="method#getCourseId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getGradeId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getFirstAvailableStudentIndex#0;class#DataService#0" expanded="false" />
-            <element signature="method#getPreferredStudentIndex#0;class#DataService#0" expanded="false" />
-            <element signature="method#getFirstAvailableCourseId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getPreferredCourseId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getPreferredGradeId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getStudentsByFilters#0;class#DataService#0" expanded="false" />
-            <element signature="method#getStudentByIndexGrades#0;class#DataService#0" expanded="false" />
-            <element signature="method#getStudentByIndexGradeById#0;class#DataService#0" expanded="false" />
-            <element signature="method#postStudent#0;class#DataService#0" expanded="false" />
-            <element signature="method#putStudent#0;class#DataService#0" expanded="false" />
-            <element signature="method#deleteStudent#0;class#DataService#0" expanded="false" />
-            <element signature="method#getCoursesByLecturer#0;class#DataService#0" expanded="false" />
-            <element signature="method#postCourse#0;class#DataService#0" expanded="false" />
-            <element signature="method#putCourse#0;class#DataService#0" expanded="false" />
-            <element signature="method#deleteCourse#0;class#DataService#0" expanded="false" />
-            <element signature="method#postGrade#0;class#DataService#0" expanded="false" />
-            <element signature="method#putGrade#0;class#DataService#0" expanded="false" />
-            <element signature="method#deleteGrade#0;class#DataService#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -688,9 +642,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="14" column="69" lean-forward="false" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -918,7 +870,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
           <caret line="82" column="49" lean-forward="true" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -926,30 +877,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#getStudentIndex#0;class#DataService#0" expanded="false" />
-            <element signature="method#getCourseId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getGradeId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getFirstAvailableStudentIndex#0;class#DataService#0" expanded="false" />
-            <element signature="method#getPreferredStudentIndex#0;class#DataService#0" expanded="false" />
-            <element signature="method#getFirstAvailableCourseId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getPreferredCourseId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getPreferredGradeId#0;class#DataService#0" expanded="false" />
-            <element signature="method#getStudentsByFilters#0;class#DataService#0" expanded="false" />
-            <element signature="method#getStudentByIndexGrades#0;class#DataService#0" expanded="false" />
-            <element signature="method#getStudentByIndexGradeById#0;class#DataService#0" expanded="false" />
-            <element signature="method#postStudent#0;class#DataService#0" expanded="false" />
-            <element signature="method#putStudent#0;class#DataService#0" expanded="false" />
-            <element signature="method#deleteStudent#0;class#DataService#0" expanded="false" />
-            <element signature="method#getCoursesByLecturer#0;class#DataService#0" expanded="false" />
-            <element signature="method#postCourse#0;class#DataService#0" expanded="false" />
-            <element signature="method#putCourse#0;class#DataService#0" expanded="false" />
-            <element signature="method#deleteCourse#0;class#DataService#0" expanded="false" />
-            <element signature="method#postGrade#0;class#DataService#0" expanded="false" />
-            <element signature="method#putGrade#0;class#DataService#0" expanded="false" />
-            <element signature="method#deleteGrade#0;class#DataService#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -957,29 +884,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main/DatabaseInit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#546#547#0" expanded="true" />
-            <element signature="e#578#579#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="14" column="67" lean-forward="false" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -993,6 +897,44 @@
             <element signature="method#getStudentGrade#0;class#GradesEndpoint#0" expanded="false" />
             <element signature="method#putGrade#0;class#GradesEndpoint#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/CoursesEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1729#1730#0" expanded="true" />
+            <element signature="e#1785#1786#0" expanded="true" />
+            <element signature="e#1876#1877#0" expanded="true" />
+            <element signature="e#1927#1928#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/front/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="67" lean-forward="false" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main/DatabaseInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1010,31 +952,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/CoursesEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1729#1730#0" expanded="true" />
-            <element signature="e#1785#1786#0" expanded="true" />
-            <element signature="e#1876#1877#0" expanded="true" />
-            <element signature="e#1927#1928#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/front/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-258">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/front/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-1723">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
