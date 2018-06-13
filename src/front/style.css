@@ -170,26 +170,38 @@ th input{
 
     table tr th {
         font-size: larger;
-        border: none;
     }
 
     table tr th input {
         font-size: 1em;
+    }
+    
+    .content{
+        background-color: white;
+    }
+    
+    input, select{
         border: none;
     }
     
-    input{
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    table tr th, table tr th input{
+        background-color: white;
+        color: black;
+    }
+    
+    table tr{
         border: none;
     }
-
-    table {
-        border-collapse: collapse;
-        border: none
-    }
-
-    tr {
-        border-bottom: solid;
-        border-width: 1px 0;
+    
+    table td, table th{
+        border: none;
+        border-bottom: 1px solid;
     }
 }
 
