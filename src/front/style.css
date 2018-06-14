@@ -1,6 +1,7 @@
 article:target{
     display: block;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 body, html{
@@ -49,7 +50,8 @@ header figure, header h1{
 
 nav{
     background: #368CB3;
-    flex-grow: 1;
+    flex-grow: 0;
+    flex-basis: content;
     min-width: 175px;
 }
 
@@ -83,13 +85,13 @@ footer{
 }
 
 .footer{
-    margin-left: 10px
+    margin-left: 10px;
 }
 
 .content{
     background: #fcfcfc;
     padding-bottom: 10px;
-    flex-grow: 10000000000;
+    flex-grow: 3;
     min-width: 300px;
 }
 
