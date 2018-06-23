@@ -50,7 +50,7 @@ header figure, header h1{
 
 nav{
     background: #368CB3;
-    flex-grow: 0;
+    flex-grow: 1;
     flex-basis: content;
     min-width: 175px;
 }
@@ -91,7 +91,7 @@ footer{
 .content{
     background: #fcfcfc;
     padding-bottom: 10px;
-    flex-grow: 3;
+    flex-grow: 1000000000;
     min-width: 300px;
 }
 

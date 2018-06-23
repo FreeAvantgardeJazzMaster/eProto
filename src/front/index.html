@@ -4,7 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Studet grade manager</title>
-        <link href="style.css" rel=stylesheet>
+        <link href="styles/style.css" rel=stylesheet>
+        <script type="text/javascript" src="scripts/jquery.js"></script>
+        <script type="text/javascript" src="scripts/knockout.js"></script>
+        <script type="text/javascript" src="scripts/mapping.js"></script>
+        <script type="text/javascript" src="scripts/script2.js"></script>
     </head>
     <body>
         <header>
@@ -21,180 +25,114 @@
             <div class="content">
                 <article id="students">
                     <h2>Student list</h2>
-                    <form>
-                        <table>
+                    <table>
+                        <tr>
+                            <th>Lp.</th>
+                            <th><input type="text" name="index" value="Index" readonly disabled/></th>
+                            <th><input type="text" name="name" value="Name" readonly disabled/></th>
+                            <th><input type="text" name="lastName" value="Last name" readonly disabled/></th>
+                            <th><input type="text" name="bithDate" value="Birth date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly disabled/></th>
+                            <th><input type="text" name="action" value="Action" readonly disabled/></th>
+                        </tr>
+                        <tbody data-bind="foreach: students">
                             <tr>
-                                <th>Lp.</th>
-                                <th><input type="text" name="index" value="Index" readonly disabled/></th>
-                                <th><input type="text" name="name" value="Name" readonly disabled/></th>
-                                <th><input type="text" name="lastName" value="Last name" readonly disabled/></th>
-                                <th><input type="text" name="bithDate" value="Birth date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly disabled/></th>
-                                <th><input type="text" name="action" value="Action" readonly disabled/></th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><input type="number" name="index" value="122374" readonly/></td>
-                                <td><input type="text" name="name" value="Adam"/></td>
-                                <td><input type="text" name="lastName" value="Kokosza"/></td>
-                                <td><input type="text" name="bithDate" value="1995-08-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td data-bind=" text: $index() + 1"></td>
+                                <td><input type="number" name="index"  data-bind="value: index" readonly/></td>
+                                <td><input type="text" name="name"  data-bind="value: firstName"/></td>
+                                <td><input type="text" name="lastName"  data-bind="value: lastName"/></td>
+                                <td><input type="text" name="birthDate" data-bind="value: birthDate" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
                                 <td>
-                                    <button onclick="window.location.href='#grades'"> Grades</button>
+                                    <button data-bind="click: $parent.students.getGrades"> Grades</button>
                                     <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
+                                    <button data-bind="click:  $parent.students.delete">Delete</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><input type="number" name="index" value="122363" readonly/></td>
-                                <td><input type="text" name="name" value="Karol"/></td>
-                                <td><input type="text" name="lastName" value="Karolek"/></td>
-                                <td><input type="text" name="bithDate" value="1993-04-23" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                                <td>
-                                    <button onclick="window.location.href='#grades'"> Grades</button>
-                                    <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td><input type="number" name="index" value="122997" readonly/></td>
-                                <td><input type="text" name="name" value="Kamil"/></td>
-                                <td><input type="text" name="lastName" value="Szmajdziński"/></td>
-                                <td><input type="text" name="bithDate" value="1995-02-01" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                                <td>
-                                    <button onclick="window.location.href='#grades'"> Grades</button>
-                                    <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td><input type="number" name="index" placeholder="Index" required></td>
+                        </tbody>
+                        <tr>
+                            <form data-bind="submit: students.add">
+                                <td></td>
+                                <td><input type="number" name="index" placeholder="Index" required readonly step="1" min="0" max="999999"></td>
                                 <td><input type="text" name="firstName" placeholder="First name" required></td>
                                 <td><input type="text" name="lastName" placeholder="Last name" required></td>
-                                <td><input type="text" name="birthday" placeholder="Birthday" onfocus="(this.type='date')"
+                                <td><input type="text" name="birthDate" placeholder="Date of birth" onfocus="(this.type='date')"
                                            onblur="(this.type='text')" required></td>
                                 <td>
                                     <button type="submit">Add</button>
                                 </td>
-                            </tr>
-                        </table>
-                    </form>
+                            </form>
+                        </tr>
+                    </table>
                 </article>
                 <article id="courses">
                     <h2>Course list</h2>
-                    <form>
-                        <table>
+                    <table>
+                        <tr>
+                            <th>Lp.</th>
+                            <th><input type="text" name="name" value="Name" readonly disabled/></th>
+                            <th><input type="text" name="lecturer" value="Lecturer" readonly disabled/></th>
+                            <th><input type="text" name="action" value="Action" readonly disabled/></th>
+                        </tr>
+                        <tbody data-bind="foreach: courses">
                             <tr>
-                                <th>Lp.</th>          
-                                <th><input type="text" name="name" value="Name" readonly disabled/></th>
-                                <th><input type="text" name="lecturer" value="Lecturer" readonly disabled/></th>
-                                <th><input type="text" name="action" value="Action" readonly disabled/></th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><input type="text" name="name" value="IT"/></td>
-                                <td><input type="text" name="lecturer" value="Tomasz Jedwabny"/></td>
+                                <td data-bind=" text: $index() + 1"></td>
+                                <td><input type="text" name="name" data-bind="value: name"/></td>
+                                <td><input type="text" name="lecturer" data-bind="value: lecturer"/></td>
                                 <td>
                                     <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
+                                    <button data-bind="click: $parent.courses.delete">Delete</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><input type="text" name="name" value="Integracja"/></td>
-                                <td><input type="text" name="lecturer" value="Patryk Kuśmierkiewicz"/></td>
-                                <td>
-                                    <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td><input type="text" name="name" value="WF"/></td>
-                                <td><input type="text" name="lecturer" value="Robert Brylewski"/></td>
-                                <td>
-                                    <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
+                        </tbody>
+                        <tr>
+                            <form data-bind="submit: courses.add">
+                                <td></td>
                                 <td><input type="text" name="name" placeholder="Name" required/></td>
                                 <td><input type="text" name="lecturer" placeholder="Lecturer" required/></td>
                                 <td>
                                     <button type="submit">Add</button>
                                 </td>
-                            </tr>
-                        </table>
-                    </form>
+                            </form>
+                        </tr>
+                    </table>
                 </article>
                 <article id="grades">
                     <h2>Student's grades</h2>
-                    <form>
-                        <table>
+                    <table>
+                        <tr>
+                            <th>Lp.</th>
+                            <th><input type="text" name="course" value="Course" readonly disabled/></th>
+                            <th><input type="text" name="value" value="Value" readonly disabled/></th>
+                            <th><input type="text" name="date" value="Date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly disabled/></th>
+                            <th><input type="text" name="action" value="Action" readonly disabled></th>
+                        </tr>
+                        <tbody data-bind="foreach: grades">
                             <tr>
-                                <th>Lp.</th>
-                                <th><input type="text" name="course" value="Course" readonly disabled/></th>
-                                <th><input type="text" name="value" value="Value" readonly disabled/></th>
-                                <th><input type="text" name="date" value="Date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly disabled/></th>
-                                <th><input type="text" name="action" value="Action" readonly disabled></th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
+                                <td data-bind=" text: $index() + 1"></td>
                                 <td>
-                                    <select>
-                                        <option selected="selected">IT</option>
-                                        <option>Integracja</option>
-                                        <option>WF</option>
+                                    <select name="id" required data-bind="options: $parent.courses,
+                                                  optionsText: function(i) { return i.name(); },
+                                                  optionsValue: function(i) { return i.id(); },
+                                                  optionsCaption: 'Choose course',
+                                                  value: course.id ">
                                     </select>
                                 </td>
-                                <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
-                                <td><input type="text" name="date" value="2018-10-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
+                                <td><input type="number" name="value" data-bind="value: value" step="0.5" min="2.0" max="5.0"/></td>
+                                <td><input type="text" name="date" data-bind="value: date" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
                                 <td>
                                     <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
+                                    <button data-bind="click: $parent.grades.delete">Delete</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
+                        </tbody>
+                        <tr>
+                            <form data-bind="submit: grades.add">
+                                <td></td>
                                 <td>
-                                    <select>
-                                        <option selected="selected">IT</option>
-                                        <option>Integracja</option>
-                                        <option>WF</option>
-                                    </select>
-                                </td>
-                                <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
-                                <td><input type="text" name="date" value="2018-03-23" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                                <td>
-                                    <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>
-                                    <select>
-                                        <option selected="selected">IT</option>
-                                        <option>Integracja</option>
-                                        <option>WF</option>
-                                    </select>
-                                </td>
-                                <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
-                                <td><input type="text" name="date" value="2018-03-10" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
-                                <td>
-                                    <button type="button">Modify</button>
-                                    <button type="button">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>
-                                    <select>
-                                        <option selected="selected">IT</option>
-                                        <option>Integracja</option>
-                                        <option>WF</option>
+                                    <select name="id" data-bind="options: viewModel.courses,
+                                                      optionsText: function(i) { return i.name(); },
+                                                      optionsValue: function(i) { return i.id(); },
+                                                      optionsCaption: 'Choose subject...',
+                                                      value: viewModel.grades.selectedCourse">
                                     </select>
                                 </td>
                                 <td><input type="number" name="value" value="2.0" step="0.5" min="2.0" max="5.0"/></td>
@@ -202,9 +140,9 @@
                                 <td>
                                     <button type="submit">Add</button>
                                 </td>
-                            </tr>
-                        </table>
-                    </form>
+                            </form>
+                        </tr>
+                    </table>
                 </article>
             </div>
         </div>
