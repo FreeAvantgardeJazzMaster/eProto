@@ -97,13 +97,15 @@ var request = function (address, id) {
                 }
             });
         }
-        $.ajax({
-            url: backendAddress + object.links['self'],
-            dataType: "json",
-            contentType: "application/json",
-            data: ko.mapping.toJSON(object, {ignore: ["links"]}),
-            method: "PUT"
-        });
+        if (object['course'] != null) {
+            $.ajax({
+                url: backendAddress + object.links['self'],
+                dataType: "json",
+                contentType: "application/json",
+                data: ko.mapping.toJSON(object, {ignore: ["links"]}),
+                method: "PUT"
+            });
+        }
     }
 
     self.deleteRequest = function (object) {
