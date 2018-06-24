@@ -167,6 +167,10 @@ th input{
     border: none;
 }
 
+th input::placeholder{
+    color: white;
+}
+
 @media print {
     body,
     body a,

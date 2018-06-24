@@ -9,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,10 @@ public class GradesEndpoint {
                                      @QueryParam("rel") String rel){
         List<Grade> grades = DataService.getStudentByIndexGrades(index);
 
-        if (grades == null || grades.size() == 0)
-            return Response.status(Response.Status.NOT_FOUND).entity("No grades").build();
+        if (grades == null || grades.size() == 0) {
+            grades = new ArrayList<>();
+        }
+
 
         if (course != null){
             grades = grades.stream().filter(grade -> grade.getCourse().getName().equals(course)).collect(Collectors.toList());
@@ -43,8 +46,8 @@ public class GradesEndpoint {
             }
         }
 
-        if (grades == null || grades.size() == 0)
-            return Response.status(Response.Status.NOT_FOUND).entity("No matching grades").build();
+       // if (grades == null || grades.size() == 0)
+          //  return Response.status(Response.Status.NOT_FOUND).entity("No matching grades").build();
 
         GenericEntity<List<Grade>> entity = new GenericEntity<List<Grade>>(Lists.newArrayList(grades)) {};
 

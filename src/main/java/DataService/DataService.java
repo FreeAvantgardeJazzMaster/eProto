@@ -203,7 +203,7 @@ public class DataService {
         }
         StudentDataAccess.addStudent(student);
 
-        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + student.getIndex()).build();
+        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + student.getIndex()).entity(student).build();
     }
 
     public static Response putStudent(int index, Student newStudent){
@@ -243,6 +243,10 @@ public class DataService {
 
     public static List<Course> getCoursesByLecturer(String lecturer){
         return CourseDataAccess.getCoursesByLecturer(lecturer);
+    }
+
+    public static List<Course> getCoursesByFilters(String lecturer, String name){
+        return CourseDataAccess.getCoursesByFilters(lecturer, name);
     }
 
     public static Course getCourseById(int id){
@@ -287,10 +291,10 @@ public class DataService {
                 student.setGrades(copyOfGrades);
                 StudentDataAccess.updateStudent(student);
             }
-            return Response.status(Response.Status.OK).build();
+            return Response.status(Response.Status.NO_CONTENT).entity(null).build();
         }
         else
-            return Response.status(Response.Status.NO_CONTENT).build();
+            return Response.status(Response.Status.NO_CONTENT).entity(null).build();
 
     }
 
@@ -310,7 +314,7 @@ public class DataService {
         student.setGrades(grades);
 
         StudentDataAccess.updateStudent(student);
-        return Response.status(Response.Status.CREATED).header("Location", "/students/" + index + "/grades/" + grade.getId()).build();
+        return Response.status(Response.Status.CREATED).header("Location", "/students/" + index + "/grades/" + grade.getId()).entity(grade).build();
     }
 
     public static Response putGrade(int index, int id, Grade newGrade){
@@ -326,7 +330,7 @@ public class DataService {
                         grade.setCourse(course);
                         grade.setDate(newGrade.getDate());
                         StudentDataAccess.updateStudent(student);
-                        return Response.status(Response.Status.OK).build();
+                        return Response.status(Response.Status.OK).entity(newGrade).build();
                     }
                 }
             }
@@ -340,7 +344,7 @@ public class DataService {
             grades.add(newGrade);
             student.setGrades(grades);
             StudentDataAccess.updateStudent(student);
-            return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + index + "/grades/" + newGrade.getId()).build();
+            return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/students/" + index + "/grades/" + newGrade.getId()).entity(newGrade).build();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }

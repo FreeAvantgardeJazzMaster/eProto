@@ -26,14 +26,16 @@
                 <article id="students">
                     <h2>Student list</h2>
                     <table>
-                        <tr>
-                            <th>Lp.</th>
-                            <th><input type="text" name="index" value="Index" readonly disabled/></th>
-                            <th><input type="text" name="name" value="Name" readonly disabled/></th>
-                            <th><input type="text" name="lastName" value="Last name" readonly disabled/></th>
-                            <th><input type="text" name="bithDate" value="Birth date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly disabled/></th>
-                            <th><input type="text" name="action" value="Action" readonly disabled/></th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Lp.</th>
+                                <th><input data-bind="textInput: viewModel.students.getIndex" type="text" name="index" placeholder="Index"/></th>
+                                <th><input data-bind="textInput: viewModel.students.queryParams.firstName" type="text" name="name" placeholder="Name" /></th>
+                                <th><input data-bind="textInput: viewModel.students.queryParams.lastName" type="text" name="lastName" placeholder="Last name"/></th>
+                                <th><input type="text" name="bithDate" value="Birth date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly disabled/></th>
+                                <th><input type="text" name="action" value="Action" readonly disabled/></th>
+                            </tr>
+                        </thead>
                         <tbody data-bind="foreach: students">
                             <tr>
                                 <td data-bind=" text: $index() + 1"></td>
@@ -43,7 +45,6 @@
                                 <td><input type="text" name="birthDate" data-bind="value: birthDate" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
                                 <td>
                                     <button data-bind="click: $parent.students.getGrades"> Grades</button>
-                                    <button type="button">Modify</button>
                                     <button data-bind="click:  $parent.students.delete">Delete</button>
                                 </td>
                             </tr>
@@ -68,8 +69,8 @@
                     <table>
                         <tr>
                             <th>Lp.</th>
-                            <th><input type="text" name="name" value="Name" readonly disabled/></th>
-                            <th><input type="text" name="lecturer" value="Lecturer" readonly disabled/></th>
+                            <th><input data-bind="textInput: viewModel.courses.queryParams.name" type="text" name="name" placeholder="Name"/></th>
+                            <th><input data-bind="textInput: viewModel.courses.queryParams.lecturer" type="text" name="lecturer" placeholder="Lecturer"/></th>
                             <th><input type="text" name="action" value="Action" readonly disabled/></th>
                         </tr>
                         <tbody data-bind="foreach: courses">
@@ -78,7 +79,6 @@
                                 <td><input type="text" name="name" data-bind="value: name"/></td>
                                 <td><input type="text" name="lecturer" data-bind="value: lecturer"/></td>
                                 <td>
-                                    <button type="button">Modify</button>
                                     <button data-bind="click: $parent.courses.delete">Delete</button>
                                 </td>
                             </tr>
@@ -119,7 +119,6 @@
                                 <td><input type="number" name="value" data-bind="value: value" step="0.5" min="2.0" max="5.0"/></td>
                                 <td><input type="text" name="date" data-bind="value: date" onfocus="(this.type='date')" onblur="(this.type='text')"/></td>
                                 <td>
-                                    <button type="button">Modify</button>
                                     <button data-bind="click: $parent.grades.delete">Delete</button>
                                 </td>
                             </tr>
@@ -128,7 +127,7 @@
                             <form data-bind="submit: grades.add">
                                 <td></td>
                                 <td>
-                                    <select name="id" data-bind="options: viewModel.courses,
+                                    <select name="id" required data-bind="options: viewModel.courses,
                                                       optionsText: function(i) { return i.name(); },
                                                       optionsValue: function(i) { return i.id(); },
                                                       optionsCaption: 'Choose subject...',

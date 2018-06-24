@@ -130,6 +130,7 @@ var request = function (address, id) {
 
     self.delete = function () {
         self.remove(this);
+       // self.deleteRequest(this);
     }
 
     self.parseQuery = function () {

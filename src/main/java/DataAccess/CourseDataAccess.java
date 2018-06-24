@@ -57,4 +57,13 @@ public class CourseDataAccess {
         return courses;
     }
 
+    public static List<Course> getCoursesByFilters(String lecturer, String name) {
+        final Query<Course> query = datastore.createQuery(Course.class);
+        if (lecturer != null)
+            query.field("lecturer").containsIgnoreCase(lecturer);
+        if (name != null)
+            query.field("name").containsIgnoreCase(name);
+        List<Course> courses = query.asList();
+        return courses;
+    }
 }

@@ -17,13 +17,14 @@ public class CoursesEndpoint {
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response getCourses(@QueryParam("lecturer") String lecturer){
+    public Response getCourses(@QueryParam("lecturer") String lecturer,
+                               @QueryParam("name") String name){
 
-        List<Course> courses = DataService.getCoursesByLecturer(lecturer);
+        List<Course> courses = DataService.getCoursesByFilters(lecturer, name);
 
-        if (courses == null || courses.size() == 0){
-            return Response.status(Response.Status.NOT_FOUND).entity("No matching courses").build();
-        }
+        //if (courses == null || courses.size() == 0){
+        //    return Response.status(Response.Status.NOT_FOUND).entity("No matching courses").build();
+       // }
 
         GenericEntity<List<Course>> entity = new GenericEntity<List<Course>>(Lists.newArrayList(courses)) {};
 
@@ -43,7 +44,7 @@ public class CoursesEndpoint {
     @POST
     public Response postCourse(Course course){
         Course newCourse = DataService.postCourse(course);
-        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/courses" + newCourse.getId()).build();
+        return Response.status(Response.Status.CREATED).header("Location", "http://localhost:8080/courses" + newCourse.getId()).entity(course).build();
     }
 
     @PUT
