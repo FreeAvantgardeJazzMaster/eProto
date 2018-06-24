@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e70d2a64-6388-45e5-97b0-9b1747b3a82d" name="Default" comment="Date of birth filtering add">
+    <list default="true" id="e70d2a64-6388-45e5-97b0-9b1747b3a82d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/front/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/front/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/front/scripts/script2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/front/scripts/script2.js" afterDir="false" />
@@ -51,8 +51,8 @@
       <file leaf-file-name="GradesEndpoint.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="55" column="69" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+            <state relative-caret-position="289">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#2083#2096#0" expanded="true" />
               </folding>
@@ -445,7 +445,7 @@
       <workItem from="1529394883957" duration="16674000" />
       <workItem from="1529412695999" duration="1729000" />
       <workItem from="1529760178727" duration="369000" />
-      <workItem from="1529765230649" duration="41304000" />
+      <workItem from="1529765230649" duration="41592000" />
     </task>
     <task id="LOCAL-00001" summary="Dodanie sztucznej bazy i dodanie metod serwisu">
       <created>1523449287887</created>
@@ -577,7 +577,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172382000" />
+    <option name="totallyTimeSpent" value="172670000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -682,7 +682,8 @@
     <MESSAGE value="Filtering student by index" />
     <MESSAGE value="Date of birth filtering add" />
     <MESSAGE value="Index filtering corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="Index filtering corrected" />
+    <MESSAGE value="Add grades filtering - front" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add grades filtering - front" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -989,8 +990,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="55" column="69" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+        <state relative-caret-position="289">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="e#2083#2096#0" expanded="true" />
           </folding>

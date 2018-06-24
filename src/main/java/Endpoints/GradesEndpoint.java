@@ -4,6 +4,7 @@ import DataModel.Grade;
 import DataService.DataService;
 import Utils.JsonError;
 import jersey.repackaged.com.google.common.collect.Lists;
+import org.apache.commons.lang.time.DateUtils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -53,7 +54,7 @@ public class GradesEndpoint {
         }
 
         if (date != null){
-            grades = grades.stream().filter(grade -> grade.getDate().equals(date)).collect(Collectors.toList());
+            grades = grades.stream().filter(grade -> DateUtils.isSameDay(grade.getDate(), date)).collect(Collectors.toList());
         }
 
        // if (grades == null || grades.size() == 0)
