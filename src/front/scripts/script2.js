@@ -24,6 +24,12 @@ var request = function (address, id) {
             success: function (data) {
                 self.removeAll();
 
+                if (!Array.isArray(data)){
+                    var tempData = data;
+                    data = new Array();
+                    data.push(tempData);
+                }
+
                 data.forEach(function (element) {
                     var object = ko.mapping.fromJS(element, {ignore: ["link"]});
                     object.links = [];
