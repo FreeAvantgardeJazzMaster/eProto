@@ -42,10 +42,10 @@ public class StudentsEndpoint {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Student getStudentByIndex(@PathParam("index") int index){
         Student student = DataService.getStudentByIndex(index);
-        if(student != null)
+        //if(student != null)
             return student;
-        else
-            throw new Utils.NotFoundException(new JsonError("Error", "Student " + String.valueOf(index) + " not found"));
+        //else
+           // throw new Utils.NotFoundException(new JsonError("Error", "Student " + String.valueOf(index) + " not found"));
     }
 
     @POST
