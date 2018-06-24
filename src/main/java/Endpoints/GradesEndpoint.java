@@ -10,6 +10,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,8 @@ public class GradesEndpoint {
     public Response getStudentGrades(@PathParam("index") int index,
                                      @QueryParam("course") String course,
                                      @QueryParam("value") String value,
-                                     @QueryParam("rel") String rel){
+                                     @QueryParam("rel") String rel,
+                                     @QueryParam("date") Date date){
         List<Grade> grades = DataService.getStudentByIndexGrades(index);
 
         if (grades == null || grades.size() == 0) {
@@ -28,11 +30,15 @@ public class GradesEndpoint {
         }
 
 
-        if (course != null){
-            grades = grades.stream().filter(grade -> grade.getCourse().getName().equals(course)).collect(Collectors.toList());
+        if (course != null && !course.isEmpty()){
+            grades = grades.stream().filter(grade -> grade.getCourse().getName().toLowerCase().contains(course.toLowerCase())).collect(Collectors.toList());
         }
 
-        if (value != null && rel != null) {
+        if (rel == null || rel.isEmpty()){
+            rel = "equal";
+        }
+
+        if ( (value != null && !value.isEmpty()) && (rel != null && !rel.isEmpty()) ) {
             switch (rel.toLowerCase()) {
                 case "equal":
                     grades = grades.stream().filter(grade -> grade.getValue() == Float.valueOf(value).floatValue()).collect(Collectors.toList());
@@ -44,6 +50,10 @@ public class GradesEndpoint {
                     grades = grades.stream().filter(grade -> grade.getValue() < Float.valueOf(value).floatValue()).collect(Collectors.toList());
                     break;
             }
+        }
+
+        if (date != null){
+            grades = grades.stream().filter(grade -> grade.getDate().equals(date)).collect(Collectors.toList());
         }
 
        // if (grades == null || grades.size() == 0)

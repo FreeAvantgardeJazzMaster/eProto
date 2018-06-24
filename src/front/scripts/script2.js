@@ -245,6 +245,21 @@ function viewModel() {
             this.reset();
         });
     }
+
+    self.grades.queryParams = {
+        value: ko.observable(null),
+        course: ko.observable(null),
+        date: ko.observable(null)
+    }
+
+    Object.keys(self.grades.queryParams).forEach(function (key) {
+        self.grades.url = backendAddress + '/students/' + self.grades.selectedStudent() + "/grades",
+            console.log(self.grades.queryParams[key]());
+        self.grades.queryParams[key].subscribe(function () {
+            self.grades.parseQuery();
+        });
+    });
+
 }
 
 var viewModel = new viewModel();

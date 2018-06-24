@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e70d2a64-6388-45e5-97b0-9b1747b3a82d" name="Default" comment="">
+    <list default="true" id="e70d2a64-6388-45e5-97b0-9b1747b3a82d" name="Default" comment="Date of birth filtering add">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/front/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/front/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/front/scripts/script2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/front/scripts/script2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/front/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/front/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/DateParamConverterProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/DateParamConverterProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,8 +24,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/front/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+            <state relative-caret-position="408">
+              <caret line="114" column="116" selection-start-line="114" selection-start-column="116" selection-end-line="114" selection-end-column="116" />
             </state>
           </provider>
         </entry>
@@ -35,8 +33,17 @@
       <file leaf-file-name="script2.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/front/scripts/script2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2805">
-              <caret line="18" column="29" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="29" />
+            <state relative-caret-position="489">
+              <caret line="250" column="14" selection-start-line="250" selection-start-column="14" selection-end-line="250" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StudentsEndpoint.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -44,8 +51,36 @@
       <file leaf-file-name="GradesEndpoint.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="323">
+              <caret line="55" column="69" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+              <folding>
+                <element signature="e#2083#2096#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Grade.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DataModel/Grade.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
+              <folding>
+                <element signature="e#1539#1540#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StudentDataAccess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/StudentDataAccess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-646">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding>
+                <element signature="e#1680#1681#0" expanded="true" />
+                <element signature="e#1719#1720#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,7 +161,6 @@
         <option value="$PROJECT_DIR$/src/main/java/DataModel/DataAccess.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataModel/Course.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main/DateParamConverterProvider.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DataModel/Grade.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataAccess/StudentAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataAccess/CourseAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataAccess/DataAccess.java" />
@@ -140,16 +174,17 @@
         <option value="$PROJECT_DIR$/src/main/java/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/front/scripts/script.js" />
         <option value="$PROJECT_DIR$/src/front/scripts/script_wooki.js" />
-        <option value="$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataService/DataService.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataAccess/CourseDataAccess.java" />
         <option value="$PROJECT_DIR$/src/main/java/Endpoints/CoursesEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/front/scripts/script2.js" />
-        <option value="$PROJECT_DIR$/src/front/index.html" />
-        <option value="$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataModel/Student.java" />
         <option value="$PROJECT_DIR$/src/main/java/Utils/DateParamConverterProvider.java" />
         <option value="$PROJECT_DIR$/src/front/styles/style.css" />
+        <option value="$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/front/scripts/script2.js" />
+        <option value="$PROJECT_DIR$/src/front/index.html" />
+        <option value="$PROJECT_DIR$/src/main/java/DataModel/Grade.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java" />
       </list>
     </option>
   </component>
@@ -171,7 +206,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
-    <option name="width" value="1181" />
+    <option name="width" value="1004" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
@@ -294,7 +329,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -410,7 +445,7 @@
       <workItem from="1529394883957" duration="16674000" />
       <workItem from="1529412695999" duration="1729000" />
       <workItem from="1529760178727" duration="369000" />
-      <workItem from="1529765230649" duration="35325000" />
+      <workItem from="1529765230649" duration="41304000" />
     </task>
     <task id="LOCAL-00001" summary="Dodanie sztucznej bazy i dodanie metod serwisu">
       <created>1523449287887</created>
@@ -524,11 +559,25 @@
       <option name="project" value="LOCAL" />
       <updated>1529838742947</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Date of birth filtering add">
+      <created>1529845332231</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1529845332231</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Index filtering corrected">
+      <created>1529848273806</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1529848273806</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166403000" />
+    <option name="totallyTimeSpent" value="172382000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -553,7 +602,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6515625" visible="true" weight="0.27450982" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6515625" visible="true" weight="0.27450982" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32943678" />
       <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4664179" weight="0.3267974" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
@@ -563,7 +612,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32998884" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47707888" weight="0.33049947" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32943678" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13059701" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13059701" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -631,27 +680,23 @@
     <MESSAGE value="Deleting courses fixed" />
     <MESSAGE value="GFiltering student by index" />
     <MESSAGE value="Filtering student by index" />
-    <option name="LAST_COMMIT_MESSAGE" value="Filtering student by index" />
+    <MESSAGE value="Date of birth filtering add" />
+    <MESSAGE value="Index filtering corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="Index filtering corrected" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="52" />
+      <option name="time" value="61" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="student.getGrades()" />
         <watch expression="getStudentByIndexGradeById(index, id)" />
+        <watch expression="course.isEmpty()" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -696,7 +741,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DataModel/st.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/Main/ErrorMessage.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/glassfish/jersey/core/jersey-server/2.22.2/jersey-server-2.22.2.jar!/org/glassfish/jersey/server/model/internal/ResourceMethodInvocationHandlerFactory.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/glassfish/jersey/core/jersey-server/2.22.2/jersey-server-2.22.2.jar!/org/glassfish/jersey/server/model/internal/JavaResourceMethodDispatcherProvider.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/mongodb/morphia/morphia/1.1.0/morphia-1.1.0.jar!/org/mongodb/morphia/DatastoreImpl.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/glassfish/jersey/core/jersey-server/2.22.2/jersey-server-2.22.2.jar!/org/glassfish/jersey/server/model/ResourceMethodInvoker.class" />
@@ -778,20 +822,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DataModel/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DataModel/Grade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="22" column="87" selection-start-line="22" selection-start-column="87" selection-end-line="22" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/front/style.css" />
     <entry file="file://$PROJECT_DIR$/src/main/java/Utils/CustomHeaders.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -851,20 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DataModel/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-54">
-          <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Utils/DateParamConverterProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -879,28 +895,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/front/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/CourseDataAccess.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="499">
           <caret line="65" column="46" lean-forward="true" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/StudentDataAccess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
-          <folding>
-            <element signature="e#1680#1681#0" expanded="true" />
-            <element signature="e#1719#1720#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -919,17 +917,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/StudentDataAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-646">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="e#1680#1681#0" expanded="true" />
+            <element signature="e#1719#1720#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/front/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="114" column="116" selection-start-line="114" selection-start-column="116" selection-end-line="114" selection-end-column="116" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/front/scripts/script2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2805">
-          <caret line="18" column="29" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="29" />
+        <state relative-caret-position="489">
+          <caret line="250" column="14" selection-start-line="250" selection-start-column="14" selection-end-line="250" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/StudentsEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataModel/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataModel/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-113">
+          <caret line="45" column="51" lean-forward="true" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/util/function/Predicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataModel/Grade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+          <folding>
+            <element signature="e#1539#1540#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/glassfish/jersey/core/jersey-server/2.22.2/jersey-server-2.22.2.jar!/org/glassfish/jersey/server/model/internal/ResourceMethodInvocationHandlerFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Endpoints/GradesEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="323">
+          <caret line="55" column="69" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+          <folding>
+            <element signature="e#2083#2096#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -111,9 +111,9 @@
                     <table>
                         <tr>
                             <th>Lp.</th>
-                            <th><input type="text" name="course" value="Course" readonly disabled/></th>
-                            <th><input type="text" name="value" value="Value" readonly disabled/></th>
-                            <th><input type="text" name="date" value="Date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly disabled/></th>
+                            <th><input type="text" name="course" placeholder="Course" data-bind="textInput: viewModel.grades.queryParams.course"/></th>
+                            <th><input type="number" name="value" step="0.5" min="2.0" max="5.0" placeholder="Value" data-bind="textInput: viewModel.grades.queryParams.value"/></th>
+                            <th><input type="text" name="date" onMouseOver="this.type='date'" onMouseOut="this.type='text'" placeholder="Date" data-bind="textInput: viewModel.grades.queryParams.date"/></th>
                             <th><input type="text" name="action" value="Action" readonly disabled></th>
                         </tr>
                         <tbody data-bind="foreach: grades">
