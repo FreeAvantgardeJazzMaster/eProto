@@ -12,6 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,14 +25,14 @@ public class StudentsEndpoint {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response getStudents(@QueryParam("firstName") String firstName,
                                      @QueryParam("lastName") String lastName,
-                                     @QueryParam("date") Date date,
-                                     @QueryParam("rel") String rel){
+                                     @QueryParam("birthDate") Date date,
+                                     @QueryParam("rel") String rel) {
         List<Student> students = DataService.getStudentsByFilters(firstName, lastName, date, rel);
 
         GenericEntity<List<Student>> entity = new GenericEntity<List<Student>>(Lists.newArrayList(students)) {};
 
         if (students == null || students.size() == 0)
-            return Response.status(Response.Status.NOT_FOUND).entity("No matching results").build();
+            return Response.status(Response.Status.NO_CONTENT).entity("No matching results").build();
 
         return Response.status(Response.Status.OK).entity(entity).build();
     }

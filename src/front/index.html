@@ -32,7 +32,18 @@
                                 <th><input data-bind="textInput: viewModel.students.getIndex" type="text" name="index" placeholder="Index"/></th>
                                 <th><input data-bind="textInput: viewModel.students.queryParams.firstName" type="text" name="name" placeholder="Name" /></th>
                                 <th><input data-bind="textInput: viewModel.students.queryParams.lastName" type="text" name="lastName" placeholder="Last name"/></th>
-                                <th><input type="text" name="bithDate" value="Birth date" onfocus="(this.type='date')" onblur="(this.type='text')" readonly disabled/></th>
+                                <th>
+                                    <input class="birthDateInput" data-bind="textInput: viewModel.students.queryParams.birthDate" type="text"
+                                           name="birthDate" onmouseover="(this.type='date')"
+                                           onmouseout="this.type='text'"
+                                           placeholder="Date of birth">
+                                    <span>G</span>
+                                    <input class="graterCheckbox" type="checkbox" data-bind="checked: viewModel.students.getRelG"
+                                           value="UP">
+                                    <span>L</span>
+                                    <input class="lowerCheckbox" type="checkbox" data-bind="checked: viewModel.students.getRelL"
+                                           value="DOWN">
+                                </th>
                                 <th><input type="text" name="action" value="Action" readonly disabled/></th>
                             </tr>
                         </thead>

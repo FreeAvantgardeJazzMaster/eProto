@@ -171,6 +171,15 @@ th input::placeholder{
     color: white;
 }
 
+.birthDateInput{
+    width: 50%;
+    height: 100%;
+}
+.graterCheckbox,
+.lowerCheckbox {
+    width: auto;
+}
+
 @media print {
     body,
     body a,

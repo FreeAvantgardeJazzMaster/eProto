@@ -163,7 +163,7 @@ function viewModel() {
         firstName: ko.observable(),
         lastName: ko.observable(),
         birthDate: ko.observable(),
-        dateRelation: ko.observable()
+        rel: ko.observable()
     }
 
     self.students.getIndex = ko.observable();
@@ -179,12 +179,12 @@ function viewModel() {
             self.students.getRelL(false);
 
             if (self.students.getRelG() === true)
-                self.students.queryParams.dateRelation("grater");
+                self.students.queryParams.rel("grater");
             else
-                self.students.queryParams.dateRelation("equal");
+                self.students.queryParams.rel("equal");
         }
         else
-            self.students.queryParams.dateRelation("equal");
+            self.students.queryParams.rel("equal");
     }, self);
 
     self.students.getRelL = ko.observable();
@@ -193,12 +193,12 @@ function viewModel() {
             self.students.getRelG(false);
 
             if (self.students.getRelL() === true)
-                self.students.queryParams.dateRelation("lower");
+                self.students.queryParams.rel("lower");
             else
-                self.students.queryParams.dateRelation("equal");
+                self.students.queryParams.rel("equal");
         }
         else
-            self.students.queryParams.dateRelation("equal");
+            self.students.queryParams.rel("equal");
     }, self);
 
     Object.keys(self.students.queryParams).forEach(function (key) {
